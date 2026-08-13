@@ -1,0 +1,56 @@
+name: Version bump
+
+on:
+  push:
+    branches: [main]
+    paths: ['plugins/**']
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Bump any plugin whose content changed without a version change
+        run: |
+          set -euo pipefail
+
+          # Baseline is the previous tip of main; fall back to the first
+          # parent when the event has no usable before-sha (force push).
+          before='${{ github.event.before }}'
+          if ! git cat-file -e "$before^{commit}" 2>/dev/null; then
+            before=$(git rev-parse HEAD^ 2>/dev/null || true)
+          fi
+          [ -n "$before" ] || { echo "no baseline commit; skipping"; exit 0; }
+
+          bumped=0
+          for manifest in plugins/*/.claude-plugin/plugin.json; do
+            plugin_dir=${manifest%/.claude-plugin/plugin.json}
+            git diff --quiet "$before" HEAD -- "$plugin_dir" && continue
+
+            old_version=$(git show "$before:$manifest" 2>/dev/null | jq -r .version || true)
+            new_version=$(jq -r .version "$manifest")
+            if [ "$old_version" != "$new_version" ]; then
+              echo "$plugin_dir: already bumped ($old_version -> $new_version)"
+              continue
+            fi
+
+            IFS=. read -r major minor patch <<<"$new_version"
+            next="$major.$minor.$((patch + 1))"
+            jq --arg v "$next" '.version = $v' "$manifest" > "$manifest.tmp"
+            mv "$manifest.tmp" "$manifest"
+            echo "$plugin_dir: $new_version -> $next"
+            bumped=1
+          done
+
+          [ "$bumped" = 1 ] || { echo "nothing to bump"; exit 0; }
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add plugins/*/.claude-plugin/plugin.json
+          git commit -m "Bump plugin versions for content merged without one"
+          git push
