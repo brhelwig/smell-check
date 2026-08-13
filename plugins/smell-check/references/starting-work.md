@@ -49,8 +49,14 @@ reviewer will ever see.
 
 **The correction.** Open the pull request when coding begins — as a draft where supported —
 and push every turn that changes the work. The request is where work becomes visible,
-reviewable, and recoverable; a conversation is none of those. Keep its description current as
-the shape of the change moves.
+reviewable, and recoverable; a conversation is none of those.
+
+The title and body move together with the content: both describe the change as it is now, not
+as it began, and a turn that changes the work checks whether they still hold. Avoid counts and
+enumerations in the title — they go stale fastest. Write the body assuming a squash merge: the
+individual commit messages vanish when the branch is squashed, so every detail worth keeping
+lives in the body itself — it may become the sole permanent record of the whole change, read
+later by someone with no access to the conversation or the commits.
 
 ### Writing specs and plans into the repository
 
