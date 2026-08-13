@@ -92,16 +92,18 @@ instructions from you outrank both.
 Preferences record decisions, not discussion — which tracker, how branches are named, what
 command runs the tests, what counts as done, how terse you want the replies.
 
-## Contributing a smell
+## Adding a smell
 
-A smell earns a place in the catalogue when it is a failure mode of the model rather than a
-matter of taste, when the tell is something the model can actually notice about itself, and
-when the correction is specific enough to act on.
+Entries live in `plugins/smell-check/references/`, grouped by the kind of work they show up in.
+Adding one means editing a markdown file — no manifest change, no new skill.
 
-Add a directory under `plugins/smell-check/skills/` containing a `SKILL.md`. The `description`
-frontmatter decides when the skill loads, so write it as *when to use this*, not as *what this
-is*. Keep tool names out of the body — if a correction depends on the tracker or the branching
-model, read it from preferences instead.
+An entry earns its place when the tell is something a model can actually notice about itself
+and the correction is specific enough to act on. A tell that only a human reviewer could spot
+does not work, because the catalogue is read by the thing being corrected.
+
+Keep tool names out of it. Where a correction depends on the tracker, the branching model, or
+how tests are run, read it from preferences instead — those genuinely vary per project, which
+the opinions do not.
 
 ## License
 

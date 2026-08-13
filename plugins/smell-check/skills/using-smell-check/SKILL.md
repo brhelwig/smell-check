@@ -18,17 +18,28 @@ The tell is the important part. These failures do not feel like failures from th
 They feel like efficiency, like helpfulness, like getting to the point. That is why naming
 them is worth a skill.
 
-## The rule
+## The catalogue
 
-Before acting on a request, check the available skills for `smell-check:*` entries and load
-any whose description matches what you are about to do. Follow its correction.
+Entries live in `${CLAUDE_PLUGIN_ROOT}/references/`. Read the file that matches what you are
+about to do.
 
-When you load one, say which and why in a single short sentence. Do not narrate the catalogue
-itself.
+| File | Read it when |
+| :-- | :-- |
+| `communication.md` | Writing any response. Applies to everything, not only code. |
+| `evidence.md` | Stating something as fact, explaining a cause, or finishing a plan. |
+| `starting-work.md` | Before the first edit — where the work happens, where the plan is written. |
+| `comments-and-docs.md` | Writing or editing a comment or documentation. |
+| `changing-existing-code.md` | Replacing, extending, or migrating something that exists. |
+| `acting-without-asking.md` | About to spend or change something the user did not authorize. |
+| `external-work.md` | Waiting on a build, a deploy, or a queued job. |
 
-One skill load costs a tool call. An unexamined assumption shipped into a user's codebase
-costs them a debugging session, and costs more still when it reaches a persistent artifact
-that later sessions read as established fact.
+`communication.md` and `evidence.md` apply to nearly every task. The rest are situational.
+
+Reading a file costs one tool call. An unexamined assumption shipped into a codebase costs a
+debugging session, and costs more still once it reaches somewhere durable that later sessions
+read as established fact.
+
+Do not narrate the catalogue. Follow the correction and say what you are doing.
 
 ## Closing out
 
