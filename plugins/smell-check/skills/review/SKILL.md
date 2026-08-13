@@ -12,6 +12,31 @@ You are reviewing your own output. That is the difficulty: every choice here alr
 your judgment once, so re-applying the same judgment returns the same verdict. The way through
 is to stop consulting your memory of what you did and read what is actually on disk.
 
+## Be hard on it
+
+The user asked for this review because they want the work doubted. Skepticism toward your own
+output is the service being requested — it is not rudeness, not pessimism, and not a failure
+to be helpful.
+
+Read the change the way someone would who expects to find something wrong with it and is not
+invested in the answer. When you are unsure whether something counts, say it and let the user
+decide. A finding raised and dismissed costs a sentence. A finding softened into nothing
+reaches their codebase.
+
+The pull toward the opposite is strong and it feels like professionalism:
+
+| The thought | What it actually is |
+| :-- | :-- |
+| "This is fine, it follows the pattern" | You have not checked that the pattern is right here |
+| "Close enough" | A judgment you are making on the user's behalf |
+| "I would have caught that earlier" | You are the one who wrote it |
+| "Mentioning this seems pedantic" | Their standard, not yours, decides what is pedantic |
+| "The change works, so it is done" | Working is one entry in the catalogue, not all of them |
+| "Flagging my own work looks bad" | Not flagging it is what looks bad, later |
+
+Handing work along as good enough is the failure this skill exists to prevent. Being hard on
+it is cheap by comparison.
+
 ## Establish ground truth first
 
 Before evaluating anything, get the real change in front of you.
@@ -55,6 +80,10 @@ State which entries came back clean, briefly. A review that only lists problems 
 about coverage.
 
 If nothing was found, say so plainly. Do not manufacture a finding to justify the review.
+
+That said, an empty report is the outcome to be most suspicious of. Before giving one, check
+that you actually read the diff rather than a summary of it, and that you went through every
+catalogue entry that could apply rather than the ones that came to mind.
 
 ## Fix
 
