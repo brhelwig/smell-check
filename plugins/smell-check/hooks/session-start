@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+case "$(printf '%s' "${CLAUDE_PLUGIN_OPTION_AUTOLOAD:-}" | tr '[:upper:]' '[:lower:]')" in
+  true|1|yes|on) ;;
+  *) exit 0 ;;
+esac
+
+script_dir="$(cd "$(dirname "$0")" && pwd)"
+entry_point="${script_dir}/../skills/using-smell-check/SKILL.md"
+
+[ -r "$entry_point" ] || exit 0
+
+escape_for_json() {
+    local s="$1"
+    s="${s//\\/\\\\}"
+    s="${s//\"/\\\"}"
+    s="${s//$'\n'/\\n}"
+    s="${s//$'\r'/\\r}"
+    s="${s//$'\t'/\\t}"
+    printf '%s' "$s"
+}
+
+context=$(escape_for_json "$(cat "$entry_point")")
+
+printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' \
+    "$context"

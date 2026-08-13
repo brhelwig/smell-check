@@ -1,0 +1,15 @@
+{
+  "name": "smell-check",
+  "description": "A catalogue of LLM and agent anti-patterns, and the corrections for them",
+  "owner": {
+    "name": "Brandon Helwig",
+    "email": "smell-check@brandonhelwig.com"
+  },
+  "plugins": [
+    {
+      "name": "smell-check",
+      "source": "./plugins/smell-check",
+      "description": "A catalogue of LLM and agent anti-patterns, and the corrections for them"
+    }
+  ]
+}

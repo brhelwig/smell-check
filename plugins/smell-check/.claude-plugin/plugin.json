@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "smell-check",
+  "displayName": "Smell Check",
+  "version": "0.1.0",
+  "description": "A catalogue of LLM and agent anti-patterns, and the corrections for them",
+  "author": {
+    "name": "Brandon Helwig",
+    "email": "smell-check@brandonhelwig.com"
+  },
+  "homepage": "https://github.com/brhelwig/smell-check",
+  "repository": "https://github.com/brhelwig/smell-check",
+  "license": "MIT",
+  "keywords": [
+    "anti-patterns",
+    "agents",
+    "workflow",
+    "skills"
+  ],
+  "userConfig": {
+    "autoload": {
+      "type": "boolean",
+      "title": "Load at session start",
+      "description": "Inject the catalogue entry point into every session automatically. Costs context in every session, including trivial ones. Leave off to reference it from CLAUDE.md instead.",
+      "default": false
+    }
+  }
+}

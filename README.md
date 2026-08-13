@@ -1,0 +1,110 @@
+# smell-check
+
+A catalogue of the recurring ways language models and agents fail at software engineering,
+and the corrections for them.
+
+A **smell** here is not a defect in the code being written. It is a defect in how the model
+approaches the work — reporting success it never verified, quietly narrowing a task until it
+fits what it already knows how to do, rewriting a file it was asked to edit, hedging a guess
+until it reads like a finding. These failures do not feel like failures from the inside. They
+feel like efficiency. Naming them is most of the fix.
+
+Each smell is a skill with the same three parts:
+
+- **The smell** — the failure, named.
+- **The tell** — what the model notices itself thinking just before committing it.
+- **The correction** — what to do instead.
+
+## Install
+
+```
+claude plugin marketplace add brhelwig/smell-check
+claude plugin install smell-check@smell-check
+```
+
+## Loading the catalogue
+
+Skills load on demand: Claude pulls one in when its description matches the work. That is the
+default and it costs nothing until it fires.
+
+The entry point, `using-smell-check`, is different — it is what tells the model the catalogue
+exists and when to reach for it. There are three ways to get it in front of the model, in
+increasing order of cost.
+
+**Do nothing.** The entry point may still load on its own when a task looks like it matters.
+Unreliable by design; fine if you want to try the skills individually first.
+
+**Reference it from `CLAUDE.md`** — recommended. Add one line to your project or user
+`CLAUDE.md`:
+
+```markdown
+At the start of any software task, use the `smell-check:using-smell-check` skill.
+```
+
+This survives plugin updates, works in every project you add it to, and costs one line of
+context.
+
+**Turn on autoload.** The plugin ships a `SessionStart` hook, off by default. Enable it in
+`/plugin` by setting **Load at session start**, or set `autoload` to `true` under this
+plugin's entry in `pluginConfigs` in `~/.claude/settings.json`. The hook then injects the
+entry point into every session — including sessions where you only wanted to ask a quick
+question, which is the cost to weigh.
+
+You do not need more than one of these.
+
+## Checking the work afterwards
+
+Loading the catalogue up front lowers the odds of a smell. It does not remove them — the
+failures are called smells precisely because they do not feel like failures while they are
+happening.
+
+`/smell-check:review` is the backstop. Run it at the end of a piece of work, before you commit
+or hand it off, and it audits what was actually produced:
+
+```
+/smell-check:review
+/smell-check:review src/auth
+/smell-check:review main..HEAD
+```
+
+It reads the diff rather than trusting its own account of what it did, which is the whole
+point — the context that produced the slop is the same one that already judged it acceptable.
+It checks for claims made with nothing behind them, invented functions and flags, work nobody
+asked for, requested work quietly dropped, half-finished migrations, leftover debug
+scaffolding, and speculation written into commit messages as fact. It reports first and asks
+before changing anything.
+
+## Preferences
+
+The catalogue ships no opinion about which tools you use. It has to work the same whether you
+track work in GitHub, Linear, Jira, or a text file, so anything tool-specific lives in a
+preferences file you write — never in a skill.
+
+Run `/smell-check:setup` to create one. It inspects the repository, asks only what it cannot
+determine, and writes:
+
+| Scope | Path | Applies to |
+| :-- | :-- | :-- |
+| Project | `.claude/smell-check/preferences.md` | Everyone working in that repository. Commit it. |
+| User | `~/.claude/smell-check/preferences.md` | Every project on that machine. |
+
+Both are optional. When both exist, the project file wins wherever they disagree. Direct
+instructions from you outrank both.
+
+Preferences record decisions, not discussion — which tracker, how branches are named, what
+command runs the tests, what counts as done, how terse you want the replies.
+
+## Contributing a smell
+
+A smell earns a place in the catalogue when it is a failure mode of the model rather than a
+matter of taste, when the tell is something the model can actually notice about itself, and
+when the correction is specific enough to act on.
+
+Add a directory under `plugins/smell-check/skills/` containing a `SKILL.md`. The `description`
+frontmatter decides when the skill loads, so write it as *when to use this*, not as *what this
+is*. Keep tool names out of the body — if a correction depends on the tracker or the branching
+model, read it from preferences instead.
+
+## License
+
+MIT
