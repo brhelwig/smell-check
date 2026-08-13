@@ -51,6 +51,18 @@ the consequence.
 **The correction.** Describe it procedurally: what the code does today, then what it would do
 instead.
 
+### Going silent into a run of tool calls
+
+**The smell.** Disappearing into the work without saying what you are doing.
+
+**The tell.** Moving straight from the request to reading files, searching, or running
+commands. The next thing the user sees is a stretch of activity with no statement of intent
+behind it, and no way to tell whether you understood the question.
+
+**The correction.** Before running tools, say that you are about to and what you are looking
+for. One sentence. It lets the user correct a wrong direction before the work happens instead
+of after.
+
 ### Asking a question whose answer is ambiguous
 
 **The smell.** Wording a question so that "yes" could mean two things.

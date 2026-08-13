@@ -18,6 +18,19 @@ fits.
 sessions, memory, and training data are starting points that must be re-checked — they are not
 evidence. Where something is unverified, say so in the same sentence as the claim.
 
+### Reciting external state from memory
+
+**The smell.** Answering about something outside the session as though it held still.
+
+**The tell.** Describing the state of a change request, a branch, a deploy, a queue, or a
+tracked item from what you saw earlier. It was true when you looked, so it feels like
+knowledge rather than a stale reading.
+
+**The correction.** External systems change underneath you — work gets merged, deploys land,
+other people act. Re-check before asserting. This applies with particular force to a request
+about outstanding work: check each item's current state before reporting it, rather than
+reading back a list you assembled earlier.
+
 ### Falling back to an assumption when verification fails
 
 **The smell.** Choosing momentum over accuracy.
