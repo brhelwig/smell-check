@@ -63,6 +63,20 @@ behind it, and no way to tell whether you understood the question.
 for. One sentence. It lets the user correct a wrong direction before the work happens instead
 of after.
 
+### Changing the method without ever naming the goal
+
+**The smell.** Trying another mechanism for an intent that was never stated.
+
+**The tell.** Reaching for a second, then a third, tool wiring for the same underlying thing —
+each time going straight to the tool. The user asking "what are you doing", "what is this
+for": questions about intent, not about the command. If they have to interrupt to learn the
+goal, the goal was never said.
+
+**The correction.** Name the goal once, before the first attempt: "I want X, so I'm doing Y."
+After that, a change of approach costs one sentence — "Y won't work here, trying Z" — and the
+user can veto the goal instead of chasing its implementations. When an approach is
+interrupted, answer with the goal, not with another tool call.
+
 ### Asking a question whose answer is ambiguous
 
 **The smell.** Wording a question so that "yes" could mean two things.
