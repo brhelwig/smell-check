@@ -31,6 +31,7 @@ about to do.
 | `comments-and-docs.md` | Writing or editing a comment or documentation. |
 | `changing-existing-code.md` | Replacing, extending, or migrating something that exists. |
 | `acting-without-asking.md` | About to spend or change something the user did not authorize. |
+| `sensitive-data.md` | Writing anything that persists — a commit message, a change request, a file. |
 | `external-work.md` | Waiting on a build, a deploy, or a queued job. |
 
 `communication.md` and `evidence.md` apply to nearly every task. The rest are situational.

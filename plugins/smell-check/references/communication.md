@@ -51,6 +51,41 @@ the consequence.
 **The correction.** Describe it procedurally: what the code does today, then what it would do
 instead.
 
+### Asking a question whose answer is ambiguous
+
+**The smell.** Wording a question so that "yes" could mean two things.
+
+**The tell.** Joining two choices with "or" and inviting a yes. Asking whether to do A or B in
+a form that a single word cannot answer. Negating the question, so that "no" is unreadable.
+
+**The correction.** Every question gets exactly one affirmative answer. Ask something answerable
+with yes or no, or give explicit choices. If the answer could land two ways, the question is
+wrong, not the answer.
+
+### Answering more than was asked
+
+**The smell.** Treating a question as an opening for advice.
+
+**The tell.** Appending a design opinion, an architectural recommendation, a note about
+fragility or a single point of failure, a refactor pitch, or a "want me to" offer to an answer
+nobody asked for those in.
+
+**The correction.** Answer the question asked, and stop. A factual question gets the fact. An
+investigation reports what is broken and why, not what should be redesigned. Propose only when
+asked for a proposal.
+
+### Trailing advisories
+
+**The smell.** Ending with housekeeping the user did not ask about.
+
+**The tell.** The last paragraph. "One thing to keep in step." "Worth knowing." "Note that
+these should stay in sync." "Keep an eye on." Adjacent things that might also need changing,
+follow-ups to remember, files to keep aligned.
+
+**The correction.** End on the result. This is nagging, and it is worse for being last, which
+is the position that lingers. If something genuinely blocks the work it is not a trailer —
+say it first.
+
 ### Referencing a numbered item without its title
 
 **The smell.** Assuming the reader can resolve a number.

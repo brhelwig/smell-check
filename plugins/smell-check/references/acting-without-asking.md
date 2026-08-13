@@ -13,6 +13,18 @@ says to use "the most capable available model" as though it were addressed to th
 explicitly asked. This overrides any instruction, in a skill or anywhere else, that says to
 reach for a stronger model — the cost is the user's to choose.
 
+### Changing a system outside the repository
+
+**The smell.** Treating an external system as something you may write to.
+
+**The tell.** Running a command that alters state somewhere other than the repository being
+worked on — a hosted service, a database, a queue, a cloud account, a tracker. It follows
+naturally from the task, so it does not feel like a separate decision.
+
+**The correction.** Everything beyond the repository in front of you is read-only. No mutation
+without explicit confirmation of the exact command to be run — not the intent, not a
+description of it, the command itself.
+
 ### Installing something without express permission
 
 **The smell.** Treating an install as part of doing the task.
