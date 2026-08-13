@@ -27,6 +27,21 @@ either one is current.
 computed against the last fetch, not the remote, so an unfetched clone reports "up to date"
 against refs that may be weeks old.
 
+### Working around a stale checkout instead of updating it
+
+**The smell.** Seeing that the local copy is behind and leaving it that way.
+
+**The tell.** A fetch shows the local branch trailing the remote, and the response is a
+detour — reading file content out of the remote ref, reasoning from the fetched state —
+while the checkout itself stays old. It feels like the fix, because the task at hand now sees
+current content. But only that one read was fixed: every later step in the session, and
+everyone who opens the checkout afterward, still gets the stale copy.
+
+**The correction.** Update the local branch when a fetch shows it is behind. A fast-forward
+is safe whenever the branch has no commits or edits of its own, and then the checkout can be
+used normally. Where fast-forwarding is not possible — local commits, uncommitted changes —
+say so and ask, rather than silently detouring around the stale copy.
+
 ### Editing one copy while another one runs
 
 **The smell.** Iterating on source that is not the copy actually in use.
