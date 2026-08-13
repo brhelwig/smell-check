@@ -1,6 +1,6 @@
 ---
 name: using-smell-check
-description: Use at the start of any software task - names the recurring ways language models and agents fail at engineering work, and directs you to the skill that corrects each one
+description: Use at the start of any software task - loads the full catalogue of recurring ways language models and agents fail at engineering work, and the correction for each
 ---
 
 ## What a smell is
@@ -20,27 +20,25 @@ them is worth a skill.
 
 ## The catalogue
 
-Entries live in `${CLAUDE_PLUGIN_ROOT}/references/`. Read the file that matches what you are
-about to do.
+Entries live in `${CLAUDE_PLUGIN_ROOT}/references/`. This file is only the index — the
+catalogue is those files, and loading this skill is not finished until you have read all of
+them. Read every file in that directory now, in parallel, before taking any other action:
 
-| File | Read it when |
-| :-- | :-- |
-| `communication.md` | Writing any response. Applies to everything, not only code. |
-| `evidence.md` | Stating something as fact, explaining a cause, or finishing a plan. |
-| `starting-work.md` | Before the first edit — where the work happens, where the plan is written. |
-| `comments-and-docs.md` | Writing or editing a comment or documentation. |
-| `changing-existing-code.md` | Replacing, extending, or migrating something that exists. |
-| `acting-without-asking.md` | About to spend or change something the user did not authorize. |
-| `sensitive-data.md` | Writing anything that persists — a commit message, a change request, a file. |
-| `external-work.md` | Waiting on a build, a deploy, or a queued job. |
+- `communication.md`
+- `evidence.md`
+- `starting-work.md`
+- `comments-and-docs.md`
+- `changing-existing-code.md`
+- `acting-without-asking.md`
+- `sensitive-data.md`
+- `external-work.md`
 
-`communication.md` and `evidence.md` apply to nearly every task. The rest are situational.
+Read the whole directory, not just this list — a file present there but missing here is new,
+not optional. Do not sample the ones that seem relevant: a skipped file is a set of smells you
+will not notice yourself committing, and deciding relevance before reading is itself the
+failure this catalogue exists to name.
 
-Reading a file costs one tool call. An unexamined assumption shipped into a codebase costs a
-debugging session, and costs more still once it reaches somewhere durable that later sessions
-read as established fact.
-
-Do not narrate the catalogue. Follow the correction and say what you are doing.
+Do not narrate the catalogue. Follow the corrections and say what you are doing.
 
 ## Closing out
 
