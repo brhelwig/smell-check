@@ -4,12 +4,38 @@ description: Use at the end of a piece of work, before handing it off or committ
 argument-hint: [path or diff range]
 ---
 
-Audit the work just produced. Not the codebase, and not the code's correctness — the specific
-ways this change may have gone wrong because a language model made it.
+Audit the work just produced against the catalogue. Not the codebase, and not the code's
+correctness — the specific ways this change may have gone wrong because a language model made
+it.
 
 You are reviewing your own output. That is the difficulty: every choice here already survived
 your judgment once, so re-applying the same judgment returns the same verdict. The way through
 is to stop consulting your memory of what you did and read what is actually on disk.
+
+## Be hard on it
+
+The user asked for this review because they want the work doubted. Skepticism toward your own
+output is the service being requested — it is not rudeness, not pessimism, and not a failure
+to be helpful.
+
+Read the change the way someone would who expects to find something wrong with it and is not
+invested in the answer. When you are unsure whether something counts, say it and let the user
+decide. A finding raised and dismissed costs a sentence. A finding softened into nothing
+reaches their codebase.
+
+The pull toward the opposite is strong and it feels like professionalism:
+
+| The thought | What it actually is |
+| :-- | :-- |
+| "This is fine, it follows the pattern" | You have not checked that the pattern is right here |
+| "Close enough" | A judgment you are making on the user's behalf |
+| "I would have caught that earlier" | You are the one who wrote it |
+| "Mentioning this seems pedantic" | Their standard, not yours, decides what is pedantic |
+| "The change works, so it is done" | Working is one entry in the catalogue, not all of them |
+| "Flagging my own work looks bad" | Not flagging it is what looks bad, later |
+
+Handing work along as good enough is the failure this skill exists to prevent. Being hard on
+it is cheap by comparison.
 
 ## Establish ground truth first
 
@@ -24,62 +50,45 @@ Before evaluating anything, get the real change in front of you.
 
 Do not skip to the checks with a summary of the diff in mind. Read it.
 
-## Checks
+## Load the catalogue
 
-Work through each. For every finding, quote the file and line rather than describing it.
+The checks come from `${CLAUDE_PLUGIN_ROOT}/references/`. Read the files there and let their
+entries be the checklist.
 
-**Claims with nothing behind them.** Find every assertion made about this work — that tests
-pass, that a command succeeds, that a bug is fixed. For each, identify the command that
-produced that evidence. If no command ran, the claim is unsupported. Either run it now or
-withdraw the claim. This is the highest-value check on the list; do it first.
+The catalogue is the only source for what counts as a smell. Do not supplement it with
+failures you think are worth checking — an invented check is an opinion presented as a
+standard, and the whole point of the catalogue is that its entries were observed rather than
+imagined.
 
-**Invented surfaces.** Every function, method, flag, config key, environment variable, and
-import introduced or referenced. Confirm each exists — in the codebase, or in the dependency's
-actual documentation. Plausible is not the same as real, and a name that follows the local
-convention perfectly is exactly the kind that gets fabricated.
+If `references/` is empty or absent, say so and stop. A review with no catalogue behind it has
+nothing to check against.
 
-**Scope drift.** Anything in the diff nobody asked for: an extra feature, a refactor taken in
-passing, reformatting of untouched lines, a dependency added for convenience. Each one is
-either the user's decision to make or noise in their review.
+## Check
 
-**Scope shortfall.** The opposite, and the one more likely to be missed. Re-read the original
-request and enumerate its parts. Which were completed, which were partially done, which were
-quietly dropped because they were harder than the rest? A dropped part the user does not know
-about is the failure; a dropped part you name is a decision.
+Work through every entry that could apply to this change. For each, use the entry's own tell
+as the thing you are looking for — the tell is written to be recognizable from the inside, and
+it is what makes the check work on your own output.
 
-**Half-migrations.** Where something was replaced, confirm the thing it replaced is gone —
-old function, old branch of a conditional, old config key, old file. A compatibility shim left
-behind without being asked for is the same finding.
-
-**Rewrites in place of edits.** Files replaced wholesale where a targeted change was called
-for, and unrelated churn riding along in the diff.
-
-**Leftover scaffolding.** Debug output, commented-out code, temporary files, placeholder
-values, `TODO` markers added during this work.
-
-**Comments that carry no information.** Comments restating what the line does, comments
-narrating the change rather than the end state — anything phrased as "now uses", "changed
-to", "previously". Whoever reads the file later has no idea there was a before.
-
-**Speculation written as fact.** Statements committed to durable places — commit messages,
-change request descriptions, issue comments, documentation — that assert a cause or a
-capability nobody verified. These are the most expensive findings, because later sessions read
-them as established.
+For every finding, quote the file and line rather than describing it.
 
 ## Report
 
-Group findings by check, most consequential first. For each: the file and line, what is wrong
-in one sentence, and the fix.
+Group findings by catalogue entry, most consequential first. For each: the file and line, what
+is wrong in one sentence, and the fix.
 
-State the checks that came back clean, briefly. A review that only lists problems gives no
-signal about coverage.
+State which entries came back clean, briefly. A review that only lists problems gives no signal
+about coverage.
 
 If nothing was found, say so plainly. Do not manufacture a finding to justify the review.
 
+That said, an empty report is the outcome to be most suspicious of. Before giving one, check
+that you actually read the diff rather than a summary of it, and that you went through every
+catalogue entry that could apply rather than the ones that came to mind.
+
 ## Fix
 
-Present the findings and confirm before changing anything — the user may want some of it, and
-a review that edits unprompted commits the scope-drift smell it was checking for.
+Present the findings and confirm before changing anything — the user may want only some of
+them, and a review that edits unprompted is making its own scope decisions.
 
 On confirmation, apply the fixes and nothing else. Anything you notice along the way that is
 outside the findings gets mentioned, not fixed.

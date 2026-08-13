@@ -4,16 +4,16 @@ A catalogue of the recurring ways language models and agents fail at software en
 and the corrections for them.
 
 A **smell** here is not a defect in the code being written. It is a defect in how the model
-approaches the work — reporting success it never verified, quietly narrowing a task until it
-fits what it already knows how to do, rewriting a file it was asked to edit, hedging a guess
-until it reads like a finding. These failures do not feel like failures from the inside. They
-feel like efficiency. Naming them is most of the fix.
+approaches the work. These failures do not feel like failures from the inside — they feel like
+efficiency, like helpfulness, like getting to the point. Naming them is most of the fix.
 
-Each smell is a skill with the same three parts:
+Every entry in the catalogue has the same three parts:
 
 - **The smell** — the failure, named.
 - **The tell** — what the model notices itself thinking just before committing it.
 - **The correction** — what to do instead.
+
+Entries are written from observed behavior, not from guesses about how models might go wrong.
 
 ## Install
 
@@ -69,10 +69,8 @@ or hand it off, and it audits what was actually produced:
 
 It reads the diff rather than trusting its own account of what it did, which is the whole
 point — the context that produced the slop is the same one that already judged it acceptable.
-It checks for claims made with nothing behind them, invented functions and flags, work nobody
-asked for, requested work quietly dropped, half-finished migrations, leftover debug
-scaffolding, and speculation written into commit messages as fact. It reports first and asks
-before changing anything.
+Its checklist is the catalogue itself, so it stays in step as entries are added and never
+invents a check of its own. It reports first and asks before changing anything.
 
 ## Preferences
 
@@ -94,16 +92,18 @@ instructions from you outrank both.
 Preferences record decisions, not discussion — which tracker, how branches are named, what
 command runs the tests, what counts as done, how terse you want the replies.
 
-## Contributing a smell
+## Adding a smell
 
-A smell earns a place in the catalogue when it is a failure mode of the model rather than a
-matter of taste, when the tell is something the model can actually notice about itself, and
-when the correction is specific enough to act on.
+Entries live in `plugins/smell-check/references/`, grouped by the kind of work they show up in.
+Adding one means editing a markdown file — no manifest change, no new skill.
 
-Add a directory under `plugins/smell-check/skills/` containing a `SKILL.md`. The `description`
-frontmatter decides when the skill loads, so write it as *when to use this*, not as *what this
-is*. Keep tool names out of the body — if a correction depends on the tracker or the branching
-model, read it from preferences instead.
+An entry earns its place when the tell is something a model can actually notice about itself
+and the correction is specific enough to act on. A tell that only a human reviewer could spot
+does not work, because the catalogue is read by the thing being corrected.
+
+Keep tool names out of it. Where a correction depends on the tracker, the branching model, or
+how tests are run, read it from preferences instead — those genuinely vary per project, which
+the opinions do not.
 
 ## License
 
