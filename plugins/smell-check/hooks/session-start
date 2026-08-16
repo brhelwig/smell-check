@@ -2,9 +2,10 @@
 
 set -euo pipefail
 
+# Unset means on: Claude Code exports only options the user set explicitly,
+# so the default declared in plugin.json has to be applied here.
 case "$(printf '%s' "${CLAUDE_PLUGIN_OPTION_AUTOLOAD:-}" | tr '[:upper:]' '[:lower:]')" in
-  true|1|yes|on) ;;
-  *) exit 0 ;;
+  false|0|no|off) exit 0 ;;
 esac
 
 script_dir="$(cd "$(dirname "$0")" && pwd)"

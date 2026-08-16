@@ -15,8 +15,8 @@ Every entry in the catalogue has the same three parts:
 
 Entries are written from observed behavior, not from guesses about how models might go wrong.
 
-One file is not a set of smells. `plain-language.md` carries a writing standard, taken from the
-ASD-STE100 Simplified Technical English rules, that several corrections elsewhere assume.
+One section is not a set of smells. **Plain language** carries a writing standard, taken from
+the ASD-STE100 Simplified Technical English rules, that several corrections elsewhere assume.
 
 ## Install
 
@@ -44,8 +44,8 @@ name it in your project or user `CLAUDE.md`, which costs one line and survives p
 At the start of any software task, use the `smell-check:using-smell-check` skill.
 ```
 
-Either way, invoking `/smell-check:using-smell-check` again mid-session re-reads the reference
-files and puts them back in front of the model. Worth doing at a stage boundary in a long
+Either way, invoking `/smell-check:using-smell-check` again mid-session puts the whole
+catalogue back in front of the model. Worth doing at a stage boundary in a long
 session, when the catalogue has fallen a long way behind the work.
 
 ## Checking the work afterwards
@@ -101,8 +101,9 @@ command runs the tests, what counts as done, how terse you want the replies.
 
 ## Adding a smell
 
-Entries live in `plugins/smell-check/references/`, grouped by the kind of work they show up in.
-Adding one means editing a markdown file — no manifest change, no new skill.
+Entries live in `plugins/smell-check/skills/using-smell-check/SKILL.md`, grouped into sections
+by the kind of work they show up in. Adding one means editing that file — no manifest change,
+no new skill.
 
 An entry earns its place when the tell is something a model can actually notice about itself
 and the correction is specific enough to act on. A tell that only a human reviewer could spot
