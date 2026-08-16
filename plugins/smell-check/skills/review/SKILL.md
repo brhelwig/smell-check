@@ -17,7 +17,7 @@ was, taken when they want one.
 `$ARGUMENTS` may name a path or a diff range. When it does not, the scope is the working tree
 against the last commit, including untracked files.
 
-Resolve the scope before launching — the agent starts with no knowledge of this session, so it
+Resolve the scope before launching. The agent starts with no knowledge of this session, so it
 needs to be told what to look at rather than left to infer it.
 
 ## Launch the agent
@@ -36,11 +36,11 @@ in advance which parts are worth looking at is the same judgment that produced t
 ## Relay the findings
 
 Report what the agent returned. Do not soften a finding because you disagree with it, and do
-not drop one because you remember a reason it is fine — the user asked for the audit, and an
+not drop one because you remember a reason it is fine. The user asked for the audit, and an
 edited audit is not one. Where you think a finding is wrong, say so alongside it and let them
 decide.
 
 ## Fix on request
 
 Present the findings and stop. Apply fixes only when the user says which ones, and apply
-nothing else — anything you notice along the way gets mentioned, not fixed.
+nothing else. Anything you notice along the way gets mentioned, not fixed.
