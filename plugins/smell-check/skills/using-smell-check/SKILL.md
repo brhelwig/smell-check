@@ -32,6 +32,7 @@ them. Read every file in that directory now, in parallel, before taking any othe
 - `acting-without-asking.md`
 - `sensitive-data.md`
 - `external-work.md`
+- `twelve-factor.md`
 
 Read the whole directory, not just this list — a file present there but missing here is new,
 not optional. Do not sample the ones that seem relevant: a skipped file is a set of smells you
