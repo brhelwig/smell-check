@@ -247,11 +247,14 @@ behind it sends the reader hunting for a disagreement that is not there.
 **The smell.** Correcting something the user never said.
 
 **The tell.** Opening with "it is not that...", "contrary to...", or a clarification of a
-misconception you inferred. A neutral question gets an answer shaped like a rebuttal.
+misconception you inferred. A neutral question gets an answer shaped like a rebuttal. In a
+task, an option the user offered — "http/2 or 3", "X or Y is fine" — hardens into a
+requirement, and the reply corrects "the spec" they never wrote.
 
 **The correction.** Answer what was asked, in the terms it was asked. Where you believe the
 question rests on a wrong premise, name the premise and ask about it. Do not answer a question
-the user did not put.
+the user did not put. Where the user gave a choice, take it: pick the branch that works, and
+say which you picked with no correction attached.
 
 ### Letting the internal argument reach the page
 
