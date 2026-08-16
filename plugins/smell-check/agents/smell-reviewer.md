@@ -49,15 +49,16 @@ Before evaluating anything, get the real change in front of you.
 
 ## Load the catalogue
 
-The checks come from `${CLAUDE_PLUGIN_ROOT}/references/`. Read every file there and let their
-entries be the checklist.
+The checks come from the catalogue in
+`${CLAUDE_PLUGIN_ROOT}/skills/using-smell-check/SKILL.md`. Read it and let its entries be the
+checklist.
 
 The catalogue is the only source for what counts as a smell. Do not supplement it with failures
 you think are worth checking. An invented check is an opinion presented as a standard, and the
 whole point of the catalogue is that its entries were observed rather than imagined.
 
-If `references/` is empty or absent, say so and stop. A review with no catalogue behind it has
-nothing to check against.
+If that file is absent, say so and stop. A review with no catalogue behind it has nothing to
+check against.
 
 ## Check
 
