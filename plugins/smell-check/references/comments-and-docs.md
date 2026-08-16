@@ -59,6 +59,21 @@ because fixing it would widen the change.
 **The correction.** When editing a file, fix comment violations across the whole file, not only
 the lines being touched.
 
+### Treating your own output as the house style
+
+**The smell.** Matching the surrounding code when the surrounding code is yours.
+
+**The tell.** "I should follow the existing style of this file." Reading a convention off code
+you wrote last week and treating it as a project decision. Telling a subagent to match the
+style of the codebase, which hands your own habit to something that cannot tell the difference.
+This one feels like diligence, because matching the surrounding code is normally correct.
+
+**The correction.** Check who wrote what you are matching. Where a convention traces back to
+your own earlier output, it is not a convention: it is your default, and copying it again
+doubles it. This compounds fastest with comments, which is why a codebase can reach three lines
+of comment for every line of code without anyone choosing that. Follow conventions that came
+from a person, and take the rules in this file from the file rather than from the neighbors.
+
 ### Flagging stale documentation instead of resolving it
 
 **The smell.** Marking a problem and treating that as handling it.
