@@ -2,7 +2,8 @@
 
 Applies when replacing, extending, or migrating something that already exists.
 
-All three entries here are the same reluctance to touch what is already written.
+The first three entries are the same reluctance to touch what is already written. The last is
+the opposite, and it is worth knowing that both failures live here.
 
 ### Leaving behind what the change replaced
 
@@ -32,3 +33,15 @@ maintaining two things, so it has to be asked for rather than assumed.
 reach into more places.
 
 **The correction.** Consolidate. Two near-copies is the cost, not the saving.
+
+### Renaming what already had a name
+
+**The smell.** Improving an identifier you were not asked to touch.
+
+**The tell.** A variable, function, or file gets a clearer name while you are in the file for
+something else. The new name is genuinely better, which is why it does not feel like a change.
+
+**The correction.** Leave names alone unless renaming is the task, or the code you are adding
+cannot work with the old name. A rename touches every call site, buries the real change in the
+diff, and breaks the reader's search for a term they knew. Say what you would rename and let
+the user decide.
