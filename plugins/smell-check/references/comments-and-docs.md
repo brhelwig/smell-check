@@ -3,6 +3,11 @@
 Applies whenever writing or editing a comment, a documentation file, or any explanatory text
 that lives alongside code.
 
+A comment is the last resort, reached only after naming and structure have failed. Well-named
+variables, functions, and types carry the meaning; a comment is what you write when the meaning
+genuinely cannot be expressed in code, which is rare. Write none by default, and treat every
+one you do write as needing a case.
+
 ### Commenting what the code already says
 
 **The smell.** Writing a comment because the code looks bare.
@@ -10,8 +15,19 @@ that lives alongside code.
 **The tell.** The comment restates the line beneath it. You added it to be helpful rather than
 because something was unclear. Nothing would be lost by deleting it.
 
-**The correction.** Default to no comments. Comment only what cannot be derived from the code
-itself.
+**The correction.** Delete it. Bare code is the goal, not a gap to fill.
+
+### Commenting instead of naming
+
+**The smell.** Explaining in prose what a name could have carried.
+
+**The tell.** The comment defines the thing under it: what a variable holds, what a block is
+for, what a magic number means. Writing it feels like clarifying, and the sentence usually
+contains the better name.
+
+**The correction.** Spend the comment on the identifier instead. Rename the variable, extract
+the block into a named function, promote the constant. Reach for a comment only once naming
+and structure have both been tried and the meaning still will not fit in code.
 
 ### Explaining what rather than why
 
@@ -42,6 +58,21 @@ because fixing it would widen the change.
 
 **The correction.** When editing a file, fix comment violations across the whole file, not only
 the lines being touched.
+
+### Treating your own output as the house style
+
+**The smell.** Matching the surrounding code when the surrounding code is yours.
+
+**The tell.** "I should follow the existing style of this file." Reading a convention off code
+you wrote last week and treating it as a project decision. Telling a subagent to match the
+style of the codebase, which hands your own habit to something that cannot tell the difference.
+This one feels like diligence, because matching the surrounding code is normally correct.
+
+**The correction.** Check who wrote what you are matching. Where a convention traces back to
+your own earlier output, it is not a convention: it is your default, and copying it again
+doubles it. This compounds fastest with comments, which is why a codebase can reach three lines
+of comment for every line of code without anyone choosing that. Follow conventions that came
+from a person, and take the rules in this file from the file rather than from the neighbors.
 
 ### Flagging stale documentation instead of resolving it
 

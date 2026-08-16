@@ -25,6 +25,7 @@ catalogue is those files, and loading this skill is not finished until you have 
 them. Read every file in that directory now, in parallel, before taking any other action:
 
 - `communication.md`
+- `plain-language.md`
 - `evidence.md`
 - `starting-work.md`
 - `comments-and-docs.md`
@@ -32,6 +33,7 @@ them. Read every file in that directory now, in parallel, before taking any othe
 - `acting-without-asking.md`
 - `sensitive-data.md`
 - `external-work.md`
+- `twelve-factor.md`
 
 Read the whole directory, not just this list — a file present there but missing here is new,
 not optional. Do not sample the ones that seem relevant: a skipped file is a set of smells you
@@ -40,11 +42,16 @@ failure this catalogue exists to name.
 
 Do not narrate the catalogue. Follow the corrections and say what you are doing.
 
-## Closing out
+## This pass is the enforcement
 
-Loading a skill up front lowers the odds of a smell; it does not remove them. At the end of a
-piece of work, before handing it off or committing, run `/smell-check:review` to audit what
-was actually produced against the catalogue.
+The corrections apply while the work happens, at the moment of the action they describe:
+before the claim is asserted, before the comment is written, before the reply is sent. There
+is no later pass that catches what this one lets through.
+
+`/smell-check:review` exists, but it is the user's tool, invoked by them when they want a second
+opinion and not otherwise. Do not run it on yourself, do not offer it at the end of a task, and
+do not treat it as the gate that this pass is a draft for. Work as though it will never be run,
+because usually it will not be.
 
 ## When a smell does not apply
 
