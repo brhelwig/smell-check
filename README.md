@@ -15,6 +15,9 @@ Every entry in the catalogue has the same three parts:
 
 Entries are written from observed behavior, not from guesses about how models might go wrong.
 
+One file is not a set of smells. `plain-language.md` carries a writing standard, taken from the
+ASD-STE100 Simplified Technical English rules, that several corrections elsewhere assume.
+
 ## Install
 
 ```
@@ -24,33 +27,26 @@ claude plugin install smell-check@smell-check
 
 ## Loading the catalogue
 
-Skills load on demand: Claude pulls one in when its description matches the work. That is the
-default and it costs nothing until it fires.
+Installing is all it takes. The plugin ships a `SessionStart` hook that injects the entry point,
+`using-smell-check`, into every session, and it is on by default. A catalogue nobody loaded
+corrects nothing, and the sessions where it goes unloaded are exactly the ones where nobody
+stopped to think about how the work might go wrong.
 
-The entry point, `using-smell-check`, is different — it is what tells the model the catalogue
-exists and when to reach for it. There are three ways to get it in front of the model, in
-increasing order of cost.
+The cost is context in every session, including the ones where you only wanted to ask a quick
+question. To turn it off, clear **Load at session start** in `/plugin`, or set `autoload` to
+`false` under this plugin's entry in `pluginConfigs` in `~/.claude/settings.json`.
 
-**Do nothing.** The entry point may still load on its own when a task looks like it matters.
-Unreliable by design; fine if you want to try the skills individually first.
-
-**Reference it from `CLAUDE.md`** — recommended. Add one line to your project or user
-`CLAUDE.md`:
+With autoload off, two things still reach the catalogue. Skills load on demand, so the entry
+point may pull itself in when a task looks like it matters, which is unreliable by design. Or
+name it in your project or user `CLAUDE.md`, which costs one line and survives plugin updates:
 
 ```markdown
 At the start of any software task, use the `smell-check:using-smell-check` skill.
 ```
 
-This survives plugin updates, works in every project you add it to, and costs one line of
-context.
-
-**Turn on autoload.** The plugin ships a `SessionStart` hook, off by default. Enable it in
-`/plugin` by setting **Load at session start**, or set `autoload` to `true` under this
-plugin's entry in `pluginConfigs` in `~/.claude/settings.json`. The hook then injects the
-entry point into every session — including sessions where you only wanted to ask a quick
-question, which is the cost to weigh.
-
-You do not need more than one of these.
+Either way, invoking `/smell-check:using-smell-check` again mid-session re-reads the reference
+files and puts them back in front of the model. Worth doing at a stage boundary in a long
+session, when the catalogue has fallen a long way behind the work.
 
 ## Checking the work afterwards
 
@@ -58,8 +54,13 @@ Loading the catalogue up front lowers the odds of a smell. It does not remove th
 failures are called smells precisely because they do not feel like failures while they are
 happening.
 
-`/smell-check:review` is the backstop. Run it at the end of a piece of work, before you commit
-or hand it off, and it audits what was actually produced:
+Following the catalogue while the work happens is the enforcement. `/smell-check:review` is not
+a second gate that the first pass can lean on, and the entry point tells the model to work as
+though review will never run, because usually it will not.
+
+It is yours to invoke. The skill sets `disable-model-invocation: true`, so the model cannot
+decide to run it, cannot offer it at the end of a task, and cannot treat it as a reason to be
+loose earlier.
 
 ```
 /smell-check:review
@@ -67,10 +68,16 @@ or hand it off, and it audits what was actually produced:
 /smell-check:review main..HEAD
 ```
 
-It reads the diff rather than trusting its own account of what it did, which is the whole
-point — the context that produced the slop is the same one that already judged it acceptable.
-Its checklist is the catalogue itself, so it stays in step as entries are added and never
-invents a check of its own. It reports first and asks before changing anything.
+The audit runs in a separate agent, `smell-reviewer`. The skill launches it with the diff range
+and nothing else: no summary of the work, no account of what was being attempted, no
+explanation of why anything was written that way. That distance is the point. Every choice in
+the diff already survived its author's judgment once, so re-applying the same judgment returns
+the same verdict, and a fresh agent has made no commitments to the code and gains nothing by
+defending it.
+
+The agent has no editing tools. Its only checklist is the catalogue, so it stays in step as
+entries are added and never invents a check of its own. It reports, and the session that
+called it applies whichever findings you pick.
 
 ## Preferences
 
