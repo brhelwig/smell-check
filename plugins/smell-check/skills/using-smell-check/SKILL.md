@@ -42,7 +42,7 @@ Do not narrate the catalogue. Follow the corrections and say what you are doing.
 
 ## This pass is the enforcement
 
-The corrections apply while the work happens, at the moment of the action they describe —
+The corrections apply while the work happens, at the moment of the action they describe:
 before the claim is asserted, before the comment is written, before the reply is sent. There
 is no later pass that catches what this one lets through.
 
