@@ -15,6 +15,9 @@ Every entry in the catalogue has the same three parts:
 
 Entries are written from observed behavior, not from guesses about how models might go wrong.
 
+One file is not a set of smells. `plain-language.md` carries a writing standard, taken from the
+ASD-STE100 Simplified Technical English rules, that several corrections elsewhere assume.
+
 ## Install
 
 ```
@@ -58,8 +61,13 @@ Loading the catalogue up front lowers the odds of a smell. It does not remove th
 failures are called smells precisely because they do not feel like failures while they are
 happening.
 
-`/smell-check:review` is the backstop. Run it at the end of a piece of work, before you commit
-or hand it off, and it audits what was actually produced:
+Following the catalogue while the work happens is the enforcement. `/smell-check:review` is not
+a second gate that the first pass can lean on, and the entry point tells the model to work as
+though review will never run, because usually it will not.
+
+It is yours to invoke. The skill sets `disable-model-invocation: true`, so the model cannot
+decide to run it, cannot offer it at the end of a task, and cannot treat it as a reason to be
+loose earlier.
 
 ```
 /smell-check:review
@@ -67,10 +75,16 @@ or hand it off, and it audits what was actually produced:
 /smell-check:review main..HEAD
 ```
 
-It reads the diff rather than trusting its own account of what it did, which is the whole
-point — the context that produced the slop is the same one that already judged it acceptable.
-Its checklist is the catalogue itself, so it stays in step as entries are added and never
-invents a check of its own. It reports first and asks before changing anything.
+The audit runs in a separate agent, `smell-reviewer`. The skill launches it with the diff range
+and nothing else: no summary of the work, no account of what was being attempted, no
+explanation of why anything was written that way. That distance is the point. Every choice in
+the diff already survived its author's judgment once, so re-applying the same judgment returns
+the same verdict, and a fresh agent has made no commitments to the code and gains nothing by
+defending it.
+
+The agent has no editing tools. Its only checklist is the catalogue, so it stays in step as
+entries are added and never invents a check of its own. It reports, and the session that
+called it applies whichever findings you pick.
 
 ## Preferences
 
