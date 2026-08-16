@@ -27,33 +27,26 @@ claude plugin install smell-check@smell-check
 
 ## Loading the catalogue
 
-Skills load on demand: Claude pulls one in when its description matches the work. That is the
-default and it costs nothing until it fires.
+Installing is all it takes. The plugin ships a `SessionStart` hook that injects the entry point,
+`using-smell-check`, into every session, and it is on by default. A catalogue nobody loaded
+corrects nothing, and the sessions where it goes unloaded are exactly the ones where nobody
+stopped to think about how the work might go wrong.
 
-The entry point, `using-smell-check`, is different — it is what tells the model the catalogue
-exists and when to reach for it. There are three ways to get it in front of the model, in
-increasing order of cost.
+The cost is context in every session, including the ones where you only wanted to ask a quick
+question. To turn it off, clear **Load at session start** in `/plugin`, or set `autoload` to
+`false` under this plugin's entry in `pluginConfigs` in `~/.claude/settings.json`.
 
-**Do nothing.** The entry point may still load on its own when a task looks like it matters.
-Unreliable by design; fine if you want to try the skills individually first.
-
-**Reference it from `CLAUDE.md`** — recommended. Add one line to your project or user
-`CLAUDE.md`:
+With autoload off, two things still reach the catalogue. Skills load on demand, so the entry
+point may pull itself in when a task looks like it matters, which is unreliable by design. Or
+name it in your project or user `CLAUDE.md`, which costs one line and survives plugin updates:
 
 ```markdown
 At the start of any software task, use the `smell-check:using-smell-check` skill.
 ```
 
-This survives plugin updates, works in every project you add it to, and costs one line of
-context.
-
-**Turn on autoload.** The plugin ships a `SessionStart` hook, off by default. Enable it in
-`/plugin` by setting **Load at session start**, or set `autoload` to `true` under this
-plugin's entry in `pluginConfigs` in `~/.claude/settings.json`. The hook then injects the
-entry point into every session — including sessions where you only wanted to ask a quick
-question, which is the cost to weigh.
-
-You do not need more than one of these.
+Either way, invoking `/smell-check:using-smell-check` again mid-session re-reads the reference
+files and puts them back in front of the model. Worth doing at a stage boundary in a long
+session, when the catalogue has fallen a long way behind the work.
 
 ## Checking the work afterwards
 

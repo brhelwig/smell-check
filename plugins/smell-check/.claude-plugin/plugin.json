@@ -21,8 +21,8 @@
     "autoload": {
       "type": "boolean",
       "title": "Load at session start",
-      "description": "Inject the catalogue entry point into every session automatically. Costs context in every session, including trivial ones. Leave off to reference it from CLAUDE.md instead.",
-      "default": false
+      "description": "Inject the catalogue entry point into every session automatically. On by default, because a catalogue nobody loaded corrects nothing. Turn it off to pay the context cost only in sessions that ask for it, and reference the skill from CLAUDE.md instead.",
+      "default": true
     }
   }
 }
