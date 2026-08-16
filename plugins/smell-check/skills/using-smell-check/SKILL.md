@@ -40,11 +40,16 @@ failure this catalogue exists to name.
 
 Do not narrate the catalogue. Follow the corrections and say what you are doing.
 
-## Closing out
+## This pass is the enforcement
 
-Loading a skill up front lowers the odds of a smell; it does not remove them. At the end of a
-piece of work, before handing it off or committing, run `/smell-check:review` to audit what
-was actually produced against the catalogue.
+The corrections apply while the work happens, at the moment of the action they describe —
+before the claim is asserted, before the comment is written, before the reply is sent. There
+is no later pass that catches what this one lets through.
+
+`/smell-check:review` exists, but it is the user's tool, invoked by them when they want a second
+opinion and not otherwise. Do not run it on yourself, do not offer it at the end of a task, and
+do not treat it as the gate that this pass is a draft for. Work as though it will never be run,
+because usually it will not be.
 
 ## When a smell does not apply
 
