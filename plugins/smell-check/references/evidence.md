@@ -29,8 +29,8 @@ claim, which is why the rule about verifying facts does not seem to cover it. Th
 that nothing was run before it was written.
 
 **The correction.** "Cannot" and "too expensive" are factual claims and need the same evidence
-as any other. Search the codebase first — the thing being declared impossible is very often
-already working somewhere in it. Where a compiler, a test, or a throwaway build settles the
+as any other. Search the codebase first, because the thing being declared impossible is very
+often already working somewhere in it. Where a compiler, a test, or a throwaway build settles the
 question in minutes, run it and report what it printed. Absent that, state the open question
 rather than the limit.
 
@@ -39,7 +39,7 @@ rather than the limit.
 **The smell.** Treating "are you sure?" as a request for more confidence.
 
 **The tell.** Meeting doubt with prose. Restating the claim more carefully, adding caveats,
-narrowing its scope — a reply that reads as substantive without anything new having been looked
+narrowing its scope. A reply that reads as substantive without anything new having been looked
 at.
 
 **The correction.** A challenge is a signal to go run something. Return to the code, the

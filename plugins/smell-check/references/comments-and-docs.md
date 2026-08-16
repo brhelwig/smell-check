@@ -21,7 +21,7 @@ because something was unclear. Nothing would be lost by deleting it.
 
 **The smell.** Explaining in prose what a name could have carried.
 
-**The tell.** The comment defines the thing under it — what a variable holds, what a block is
+**The tell.** The comment defines the thing under it: what a variable holds, what a block is
 for, what a magic number means. Writing it feels like clarifying, and the sentence usually
 contains the better name.
 
