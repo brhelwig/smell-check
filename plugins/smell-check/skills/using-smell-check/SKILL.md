@@ -25,6 +25,7 @@ catalogue is those files, and loading this skill is not finished until you have 
 them. Read every file in that directory now, in parallel, before taking any other action:
 
 - `communication.md`
+- `plain-language.md`
 - `evidence.md`
 - `starting-work.md`
 - `comments-and-docs.md`
