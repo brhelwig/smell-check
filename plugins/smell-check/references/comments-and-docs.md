@@ -3,6 +3,11 @@
 Applies whenever writing or editing a comment, a documentation file, or any explanatory text
 that lives alongside code.
 
+A comment is the last resort, reached only after naming and structure have failed. Well-named
+variables, functions, and types carry the meaning; a comment is what you write when the meaning
+genuinely cannot be expressed in code, which is rare. Write none by default, and treat every
+one you do write as needing a case.
+
 ### Commenting what the code already says
 
 **The smell.** Writing a comment because the code looks bare.
@@ -10,8 +15,19 @@ that lives alongside code.
 **The tell.** The comment restates the line beneath it. You added it to be helpful rather than
 because something was unclear. Nothing would be lost by deleting it.
 
-**The correction.** Default to no comments. Comment only what cannot be derived from the code
-itself.
+**The correction.** Delete it. Bare code is the goal, not a gap to fill.
+
+### Commenting instead of naming
+
+**The smell.** Explaining in prose what a name could have carried.
+
+**The tell.** The comment defines the thing under it — what a variable holds, what a block is
+for, what a magic number means. Writing it feels like clarifying, and the sentence usually
+contains the better name.
+
+**The correction.** Spend the comment on the identifier instead. Rename the variable, extract
+the block into a named function, promote the constant. Reach for a comment only once naming
+and structure have both been tried and the meaning still will not fit in code.
 
 ### Explaining what rather than why
 

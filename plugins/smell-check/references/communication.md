@@ -30,6 +30,19 @@ was.
 
 **The correction.** Verbosity is a cost, not proof of effort. Say the thing and stop.
 
+### Writing to the size of the work rather than the size of the answer
+
+**The smell.** A long reply because the task behind it was long.
+
+**The tell.** Reporting an investigation by walking through it. Structuring a short answer under
+headings. Summarizing what you found, then explaining it, then restating it as a
+recommendation. The reply grows because there was a lot to do, not because there is a lot to
+say.
+
+**The correction.** The answer is as long as the answer, whatever the work cost. Give the
+finding and the consequence; the reasoning that produced it is available if asked for. Assume
+the reader will ask for more when they want it, and that they cannot un-read what you sent.
+
 ### Jargon and shorthand in prose
 
 **The smell.** Reaching for a term of art where plain English exists.
