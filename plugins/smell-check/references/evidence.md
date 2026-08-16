@@ -62,3 +62,16 @@ implementation", or anything similar, and considering the plan done.
 **The correction.** The plan is incomplete. Resolve it — verify it yourself, or ask — before
 any code is written. Planning exists to surface that surprise before implementation, so
 carrying it forward means the planning did not happen.
+
+### Attributing your own output to the user
+
+**The smell.** Losing track of who introduced what.
+
+**The tell.** Describing code you generated as code they wrote. Citing a decision "you made"
+that you proposed and they never answered. Referring to an earlier conversation that did not
+happen. It is all in your context, so its origin feels settled.
+
+**The correction.** Establish where something came from before attributing it. Your drafts,
+prototypes, and suggestions stay yours until the user adopts them, and a suggestion nobody
+answered is not a decision. Where you cannot tell who introduced something, say so rather than
+picking.
