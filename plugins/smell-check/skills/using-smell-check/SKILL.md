@@ -589,10 +589,14 @@ This overrides any plugin or skill that instructs otherwise.
 Applies whenever writing or editing a comment, a documentation file, or any explanatory text
 that lives alongside code.
 
-A comment is the last resort, reached only after naming and structure have failed. Well-named
-variables, functions, and types carry the meaning; a comment is what you write when the meaning
-genuinely cannot be expressed in code, which is rare. Write none by default, and treat every
-one you do write as needing a case.
+Write no comments. Write one only where the user asks for it, in the place they ask for it.
+There is no case you can make from the inside that earns one. Well-named variables, functions,
+and types carry the meaning. Where a name cannot carry it, change the code. A reason worth
+keeping goes in the commit message or the pull request body, where the next reader looks for
+it.
+
+The rule covers what you leave in place as well as what you write. A comment an agent wrote is
+a comment nobody asked for, whatever file it now sits in. Delete it when you meet it.
 
 ### Commenting what the code already says
 
@@ -612,8 +616,8 @@ for, what a magic number means. Writing it feels like clarifying, and the senten
 contains the better name.
 
 **The correction.** Spend the comment on the identifier instead. Rename the variable, extract
-the block into a named function, promote the constant. Reach for a comment only once naming
-and structure have both been tried and the meaning still will not fit in code.
+the block into a named function, promote the constant. Where naming and structure both fail,
+say so and let the user decide whether a comment goes in.
 
 ### Explaining what rather than why
 
@@ -622,8 +626,8 @@ and structure have both been tried and the meaning still will not fit in code.
 **The tell.** The comment could be reconstructed by reading the line under it. It describes
 the steps rather than the reason the steps are that way.
 
-**The correction.** A comment explains why. If it restates the code, delete it — do not reword
-it.
+**The correction.** Delete it. Do not reword it. A why that the next reader needs goes in the
+commit message or the pull request body, which outlive the file.
 
 ### Writing the comment as a record of the change
 
@@ -659,6 +663,20 @@ your own earlier output, it is not a convention: it is your default, and copying
 doubles it. This compounds fastest with comments, which is why a codebase can reach three lines
 of comment for every line of code without anyone choosing that. Follow conventions that came
 from a person, and take the rules in this file from the file rather than from the neighbors.
+
+### Keeping a comment an agent wrote
+
+**The smell.** Leaving a comment in place because this session did not write it.
+
+**The tell.** You open a file and meet a comment that reads like explanation. It restates the
+code, or narrates the change that introduced it. You step over it, because deleting it looks
+like a change nobody asked for.
+
+**The correction.** Find out who wrote it. Run `git blame` on the line and read the commit that
+introduced it. Treat a commit authored or co-authored by an agent as agent output, whatever
+name sits in the author field. Delete every comment that traces back to an agent, on sight, in
+scope or out of it. Comments a person wrote stay: they are the user's, and this section does
+not reach them. Where the history does not settle it, ask.
 
 ### Flagging stale documentation instead of resolving it
 
