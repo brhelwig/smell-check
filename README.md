@@ -27,14 +27,19 @@ claude plugin install smell-check@smell-check
 
 ## Loading the catalogue
 
-Installing is all it takes. The plugin ships a `SessionStart` hook that injects the entry point,
-`using-smell-check`, into every session, and it is on by default. A catalogue nobody loaded
-corrects nothing, and the sessions where it goes unloaded are exactly the ones where nobody
-stopped to think about how the work might go wrong.
+Installing is all it takes. The plugin ships a `SessionStart` hook, on by default, that tells
+every session to load the entry point, `using-smell-check`, before it starts software work. The
+catalogue arrives when the session invokes that skill. A catalogue nobody loaded corrects
+nothing, and the sessions where it goes unloaded are exactly the ones where nobody stopped to
+think about how the work might go wrong.
 
-The cost is context in every session, including the ones where you only wanted to ask a quick
-question. To turn it off, clear **Load at session start** in `/plugin`, or set `autoload` to
-`false` under this plugin's entry in `pluginConfigs` in `~/.claude/settings.json`.
+The hook itself stays a few lines long. Claude Code spills oversized hook output to a file and
+injects a short preview in its place, so a hook cannot carry the catalogue directly — it has to
+name the skill and let the skill loader do the work.
+
+The cost is context in every session that starts software work. To turn it off, clear **Load at
+session start** in `/plugin`, or set `autoload` to `false` under this plugin's entry in
+`pluginConfigs` in `~/.claude/settings.json`.
 
 With autoload off, two things still reach the catalogue. Skills load on demand, so the entry
 point may pull itself in when a task looks like it matters, which is unreliable by design. Or
