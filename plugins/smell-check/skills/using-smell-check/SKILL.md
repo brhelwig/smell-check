@@ -514,7 +514,8 @@ picking.
 ## Starting work
 
 Applies before the first edit, when establishing where the work happens and where the thinking
-is written down.
+is written down. Three of the entries carry on through the task, because the branch and the
+remote both keep moving after the first edit lands.
 
 ### Working in the main checkout, or on the default branch
 
@@ -573,11 +574,18 @@ have diverged, diff them and say which version is under test.
 
 **The tell.** Turns of edits accumulating on a local branch, visible only in the conversation.
 Planning to open the request "once it is ready". Decisions being made in discussion that no
-reviewer will ever see.
+reviewer will ever see. The offer at the end of a finished task: "want me to commit this and
+open a pull request?" A request held in draft until the build goes green.
 
-**The correction.** Open the pull request when coding begins — as a draft where supported —
-and push every turn that changes the work. The request is where work becomes visible,
-reviewable, and recoverable; a conversation is none of those.
+**The correction.** Open the pull request before the first edit, as a draft where supported.
+Nothing exists to push at that point, so start the branch with an empty commit and open the
+request on that. Push every later turn that changes the work. The request is where work becomes
+visible, reviewable, and recoverable; a conversation is none of those.
+
+Mark the request ready as soon as the first pass of the work is pushed. Do not wait for a green
+build, a second read, or a round of polish. The user reads the code while the checks run, and a
+draft tells them the work is not for them yet. Ready means reviewable, not done — a failing
+check is still yours to fix.
 
 The title and body move together with the content: both describe the change as it is now, not
 as it began, and a turn that changes the work checks whether they still hold. Avoid counts and
@@ -585,6 +593,33 @@ enumerations in the title — they go stale fastest. Write the body assuming a s
 individual commit messages vanish when the branch is squashed, so every detail worth keeping
 lives in the body itself — it may become the sole permanent record of the whole change, read
 later by someone with no access to the conversation or the commits.
+
+### Rewriting a branch that other people can already see
+
+**The smell.** Force pushing to tidy history that is already published.
+
+**The tell.** A force push, with or without a lease. Amending a commit that is already on the
+remote. A rebase or a squash to make the branch read cleanly before review. It feels like a
+courtesy to the reviewer, and the branch is yours, so it does not feel destructive.
+
+**The correction.** Never force push. Correct a pushed branch by adding another commit. A
+rewrite drops the commits that review comments and test results point at, and it breaks the
+checkout of anyone who pulled the branch. The merge tidies the history, and it does that
+without your help.
+
+### Letting the branch fall behind the default branch
+
+**The smell.** Treating the update from the default branch as a step the user calls for.
+
+**The tell.** The branch has not seen the default branch since it was cut. A conflict appears,
+and the reply hands it back as a question. Waiting to be told to update, because the update is
+not part of the change you were asked for.
+
+**The correction.** Fetch and merge the default branch into your branch as the work goes, and
+again before you call the work ready. Resolve the conflicts yourself and say in one line what
+you resolved. Merge rather than rebase, since the branch is pushed from its first commit and
+must never be force pushed. Ask only where the two sides disagree about intent and the code
+cannot settle which one is right.
 
 ### Writing specs and plans into the repository
 
