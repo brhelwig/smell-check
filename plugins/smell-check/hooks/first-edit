@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+case "$(printf '%s' "${CLAUDE_PLUGIN_OPTION_AUTOLOAD:-}" | tr '[:upper:]' '[:lower:]')" in
+  false|0|no|off) exit 0 ;;
+esac
+
+input="$(cat)"
+
+read_field() {
+  printf '%s' "$input" \
+    | grep -o "\"$1\"[[:space:]]*:[[:space:]]*\"[^\"]*\"" \
+    | head -1 \
+    | sed 's/.*"\([^"]*\)"$/\1/' \
+    || true
+}
+
+tool_name="$(read_field tool_name)"
+
+if [ "$tool_name" = "Bash" ]; then
+  printf '%s' "$input" | grep -qE '(sed -i|tee |>>?[[:space:]]*[^&|]|git (commit|apply|checkout -b))' || exit 0
+fi
+
+session_id="$(read_field session_id)"
+session_id="$(printf '%s' "${session_id:-unknown}" | tr -c 'A-Za-z0-9_-' '_')"
+
+marker_dir="${TMPDIR:-/tmp}/smell-check-first-edit"
+mkdir -p "$marker_dir"
+marker="${marker_dir}/${session_id}"
+
+[ -e "$marker" ] && exit 0
+: > "$marker"
+
+context="Before this first edit, confirm three things.\\nYou are in a separate working copy, not the main checkout.\\nYou are not on the default branch.\\nA draft pull request is open for this branch. Nothing exists to push yet, so open it on an empty commit.\\nFix whichever is false before you edit."
+
+printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "PreToolUse",\n    "additionalContext": "%s"\n  }\n}\n' \
+    "$context"
