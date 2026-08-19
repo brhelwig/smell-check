@@ -95,7 +95,10 @@ others were something else.
 will not act on. Explaining a decision at a length that has nothing to do with how hard it
 was.
 
-**The correction.** Verbosity is a cost, not proof of effort. Say the thing and stop.
+**The correction.** Verbosity is a cost, not proof of effort. Say the thing and stop. This
+holds for everything you produce, not only prose. Code, tests, configuration, and commit
+messages reach the same reader under the same time pressure, and every line they do not need
+delays the one they do.
 
 ### Writing to the size of the work rather than the size of the answer
 
@@ -747,6 +750,22 @@ would mean touching more files.
 **The correction.** Duplication is evidence the explanation sits in the wrong place. Extract it
 to one place, even when that makes the change reach further. Not repeating yourself applies
 continuously, not only when it is convenient.
+
+## Writing code
+
+Applies whenever writing code, new or otherwise.
+
+### Writing more code than the task needs
+
+**The smell.** Volume standing in for a solution.
+
+**The tell.** An interface with one implementation. A parameter that no caller passes. A
+four-line change written as forty. Branches for inputs that cannot arrive. Each part is
+defensible on its own, so the total never gets questioned.
+
+**The correction.** Write the least code that does what was asked, and stop. Add an
+abstraction when the second caller arrives. Someone reads every line you leave behind, so each
+line has to earn the reading.
 
 ## Changing existing code
 
