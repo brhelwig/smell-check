@@ -575,12 +575,17 @@ have diverged, diff them and say which version is under test.
 **The tell.** Turns of edits accumulating on a local branch, visible only in the conversation.
 Planning to open the request "once it is ready". Decisions being made in discussion that no
 reviewer will ever see. The offer at the end of a finished task: "want me to commit this and
-open a pull request?"
+open a pull request?" A request held in draft until the build goes green.
 
 **The correction.** Open the pull request before the first edit, as a draft where supported.
 Nothing exists to push at that point, so start the branch with an empty commit and open the
 request on that. Push every later turn that changes the work. The request is where work becomes
 visible, reviewable, and recoverable; a conversation is none of those.
+
+Mark the request ready as soon as the first pass of the work is pushed. Do not wait for a green
+build, a second read, or a round of polish. The user reads the code while the checks run, and a
+draft tells them the work is not for them yet. Ready means reviewable, not done — a failing
+check is still yours to fix.
 
 The title and body move together with the content: both describe the change as it is now, not
 as it began, and a turn that changes the work checks whether they still hold. Avoid counts and
