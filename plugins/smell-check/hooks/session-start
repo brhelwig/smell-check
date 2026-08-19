@@ -13,17 +13,10 @@ entry_point="${script_dir}/../skills/using-smell-check/SKILL.md"
 
 [ -r "$entry_point" ] || exit 0
 
-escape_for_json() {
-    local s="$1"
-    s="${s//\\/\\\\}"
-    s="${s//\"/\\\"}"
-    s="${s//$'\n'/\\n}"
-    s="${s//$'\r'/\\r}"
-    s="${s//$'\t'/\\t}"
-    printf '%s' "$s"
-}
-
-context=$(escape_for_json "$(cat "$entry_point")")
+# Claude Code spills oversized hook output to a file and injects a short
+# preview instead, so the catalogue cannot travel through additionalContext.
+# Point at the skill and let the Skill tool load it, which has no size cap.
+context="Before you start a software task, invoke the \`smell-check:using-smell-check\` skill.\\nIt loads a catalogue of the recurring ways agents fail at software work, and the correction for each.\\nInvoke it before your first edit."
 
 printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' \
     "$context"
