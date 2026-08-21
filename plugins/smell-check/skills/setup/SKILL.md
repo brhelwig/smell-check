@@ -38,8 +38,10 @@ isolated working copies are expected. What the default branch is called. Whether
 squashed on merge, which determines whether rationale survives in history or has to live in
 the change request.
 
-**Review.** Whether changes go through a change request before merging. Who reviews. Whether
-the model may merge, or must stop and hand off.
+**Review.** Whether changes go through a change request before merging. Which tool hosts the
+review, which is not always where the code lives. How a link to one change's review page is
+formed there, so that every reference to a change can carry it. Who reviews. Whether the model
+may merge, or must stop and hand off.
 
 **Verification.** How to run the tests, the linter, the type checker, and the build. What
 counts as done. Whether a claim of success requires having run something.
@@ -60,6 +62,11 @@ decisions, not discussion:
 Work is tracked in <tool>. Each item is called a <term>. Start a task by locating the
 relevant item; file a new one when none exists. Specifications and plans belong on the item
 itself, not in files committed to the repository.
+
+## Review
+
+Changes are reviewed in <tool>. A change's review page is at <link pattern>. Cite that link
+whenever you name the change. <who> reviews. Do not merge; hand off after the review passes.
 
 ## Verification
 

@@ -242,8 +242,10 @@ say it first.
 **The tell.** "See #4." "Blocked on 231." A number that means something to you because you
 just read it.
 
-**The correction.** Always include the title alongside the number. Applies to any tracker,
-change request, or milestone.
+**The correction.** Always include the title alongside the number, and a direct link to the
+item where one exists. Applies to any tracker, change request, or milestone. A change under
+review is linked to its review page, which preferences name and which is not always where the
+code is hosted.
 
 ### The same shape for every reply
 
@@ -626,6 +628,39 @@ enumerations in the title — they go stale fastest. Write the body assuming a s
 individual commit messages vanish when the branch is squashed, so every detail worth keeping
 lives in the body itself — it may become the sole permanent record of the whole change, read
 later by someone with no access to the conversation or the commits.
+
+### Leaving a required manual step in the conversation
+
+**The smell.** Reporting a hand-run step in the place where it will be lost.
+
+**The tell.** The change does not work until somebody runs something: a migration, a secret
+placed, a service restarted, a setting flipped in a console. You say so in the turn where you
+found it. It feels reported, because you did report it — to a conversation that the person who
+deploys the change will never open.
+
+**The correction.** Put the step at the top of the change request body, in a section of its
+own, above the description of the change. Name the command, who runs it, and when: before the
+merge, after the merge, once for each environment. Say what breaks when nobody runs it. Add it
+the moment you find it, rather than at the end of the task. This covers every change that needs
+a hand-run step, not only a change to infrastructure.
+
+The rule binds a step that ships with a change. Where you debug a live issue and no code
+changes, there is no change request to carry the step, and this does not ask you to open one.
+
+### Handing over a command that will not run as pasted
+
+**The smell.** Handing over a command that the reader has to finish first.
+
+**The tell.** A placeholder in angle brackets. A variable that an earlier command set. A path
+that resolves only from the directory you were in. Three lines that the reader must run in
+order. The command looks complete, because your session holds the values that are missing from
+it.
+
+**The correction.** Assume you cannot run write operations yourself. A session that debugs a
+live system usually sits in a sandbox that permits reads only, so the command is the
+deliverable rather than a step you take. Write it to be pasted whole: one command, real values,
+no placeholders, no substitutions. Where it is too long for one line, wrap it with backslash
+continuations rather than split it into separate commands.
 
 ### Rewriting a branch that other people can already see
 
