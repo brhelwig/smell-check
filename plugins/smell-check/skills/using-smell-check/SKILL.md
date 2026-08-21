@@ -516,9 +516,39 @@ picking.
 
 ## Starting work
 
-Applies before the first edit, when establishing where the work happens and where the thinking
-is written down. Three of the entries carry on through the task, because the branch and the
-remote both keep moving after the first edit lands.
+Applies before the first edit, when establishing what the work is, where it happens, and where
+the thinking is written down. Several of the entries carry on through the task, because the
+approval, the branch, and the remote all keep moving after the first edit lands.
+
+### Starting the work before the plan is approved
+
+**The smell.** Treating a clear request as permission to begin.
+
+**The tell.** The request is unambiguous, so the next action is a working copy, a branch, or an
+edit. Nothing feels skipped, because nothing seemed open to decide. Debugging hides it best:
+the fault is in front of you and the fix is small, so patching reads as investigation rather
+than as a change.
+
+**The correction.** Every task opens in a planning phase, in the harness's planning mode where
+one exists. Read, search, and run read-only commands to build the plan. Write nothing.
+Investigation and debugging are included, and they end in a plan rather than in a patch. The
+plan then waits for an explicit approval message from the user. Silence is not approval, and
+neither is an earlier agreement to something else. Nothing exists before the approval arrives:
+no working copy, no branch, no change request, no edit. After it arrives, the order is working
+copy, then change request, then the first edit.
+
+### Absorbing new work into an approved plan
+
+**The smell.** Carrying on past the approved plan because the branch is already open.
+
+**The tell.** A review comment lands, or the user raises something else, and the next edit goes
+on the same branch. The new item sits beside the approved one, which makes it feel like the
+same task. "While I am in here."
+
+**The correction.** The approval covers the plan it was given for, and nothing else. A minor
+fix to the change under review belongs to that work: a typo, a wrong name, a defect in the code
+you just wrote. Everything else returns to the planning phase. Plan the new work, and wait for
+the approval again before the next edit.
 
 ### Working in the main checkout, or on the default branch
 
