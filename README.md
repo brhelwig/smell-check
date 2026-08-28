@@ -27,31 +27,49 @@ claude plugin install smell-check@smell-check
 
 ## Loading the catalogue
 
-Installing is all it takes. The plugin ships a `SessionStart` hook, on by default, that tells
-every session to load the entry point, `using-smell-check`, before it starts software work. The
-catalogue arrives when the session invokes that skill. A catalogue nobody loaded corrects
-nothing, and the sessions where it goes unloaded are exactly the ones where nobody stopped to
-think about how the work might go wrong.
+The catalogue arrives when a session invokes `using-smell-check`. Two ways to make that happen.
 
-The hook itself stays a few lines long. Claude Code spills oversized hook output to a file and
-injects a short preview in its place, so a hook cannot carry the catalogue directly — it has to
-name the skill and let the skill loader do the work.
-
-The cost is context in every session that starts software work. To turn it off, clear **Load at
-session start** in `/plugin`, or set `autoload` to `false` under this plugin's entry in
-`pluginConfigs` in `~/.claude/settings.json`.
-
-With autoload off, two things still reach the catalogue. Skills load on demand, so the entry
-point may pull itself in when a task looks like it matters, which is unreliable by design. Or
-name it in your project or user `CLAUDE.md`, which costs one line and survives plugin updates:
+Name it in your project or user `CLAUDE.md`. It survives plugin updates, and it is the way to
+say how seriously you want the catalogue taken:
 
 ```markdown
-At the start of any software task, use the `smell-check:using-smell-check` skill.
+## Smell check
+
+Before starting any software task — writing or changing code, debugging, reviewing, planning
+work, or answering a question about a codebase — invoke the `smell-check:using-smell-check`
+skill and read it in full.
+
+Apply its corrections zealously. Each one works at the moment of the action it names: before
+the claim, before the comment, before the reply. Nothing later catches what this pass lets
+through, so there is no second gate to leave it for. Where a correction and your own instinct
+disagree, the correction wins.
+
+Invoke it again at a stage boundary in a long session, once the catalogue has fallen behind the
+work.
 ```
 
-Either way, invoking `/smell-check:using-smell-check` again mid-session puts the whole
+Zealous means applying every correction that fits, not forcing the work to fit one. The
+catalogue's own `When a smell does not apply` still governs: a tell that does not match your
+situation is not a smell, and deciding an entry does not apply is a correct outcome rather than
+a way out.
+
+Or invoke `/smell-check:using-smell-check` yourself, when a task is big enough to be worth the
+context.
+
+Skills also load on demand, so the entry point may pull itself in when a task looks like it
+matters. That is unreliable by design and not something to depend on.
+
+Invoking `/smell-check:using-smell-check` again mid-session puts the whole
 catalogue back in front of the model. Worth doing at a stage boundary in a long
 session, when the catalogue has fallen a long way behind the work.
+
+Earlier versions shipped hooks that nudged every session to load the catalogue and reminded the
+model about branches before its first edit. Both are gone. The `SessionStart` hook could not
+carry the catalogue itself — Claude Code spills oversized hook output to a file — so it only
+asked the session to load the skill, which `CLAUDE.md` does more simply and more durably. The
+`PreToolUse` hook was redundant: the catalogue's own entries produce the same branching
+behaviour without it, and its command filter matched `2>/dev/null`, so a read-only command
+usually spent the one reminder it was allowed to give.
 
 ## Checking the work afterwards
 
