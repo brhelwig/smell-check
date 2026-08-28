@@ -140,7 +140,8 @@ prose: every line the reader does not need delays the one they do.
 **The smell.** Reaching for a term of art where plain English exists.
 
 **The tell.** Variable names, type names, and code-level labels in a sentence meant for a
-person. Insider vocabulary — "spike", "idempotent", "reconcile loop" — used as common speech.
+person. Insider vocabulary — "idempotent", "reconcile loop", "back-pressure" — used as common
+speech.
 
 **The correction.** Write plain English. Where a precise term is unavoidable, define it in the
 same sentence.
@@ -348,7 +349,8 @@ documentation, and comments.
 Write to the rules of ASD-STE100 Simplified Technical English. It keeps technical material
 unambiguous for readers under time pressure, which is the problem a reply in a terminal has.
 Adopt the writing rules only: the approved-word dictionary is closed, aviation-specific, and
-lacks the vocabulary of software.
+lacks the vocabulary of software. What the dictionary was for survives as a rule instead —
+prefer the plainest word that is still accurate.
 
 - Use the active voice. Use the passive only when the agent is genuinely unknown.
 - Keep instructions to 20 words or fewer. Keep descriptive sentences to 25 or fewer.
@@ -361,6 +363,7 @@ lacks the vocabulary of software.
 - Write one topic per paragraph, and no more than six sentences in a paragraph.
 - Use a vertical list when the content is a list.
 - Give a word one meaning and keep it. Use the same word for the same thing every time.
+- Prefer the plainest word that is accurate. Where two words both fit, use the duller one.
 
 The last rule costs the most and matters the most. Repeating a word reads as monotony from the
 inside and as precision from the outside. Vary the sentence, never the term.
@@ -373,6 +376,21 @@ keeps it, exactly, including its capitalization.
 Do not coin a word, a near-synonym, or a category label for something already named. A reader
 who meets an invented term has to work out whether it means the thing they know, and the answer
 is usually yes.
+
+### Reaching for the more interesting word
+
+**The smell.** Choosing a word for colour when a plainer one is more accurate.
+
+**The tell.** Ordinary English, dressed up. Traffic "spikes" rather than rises. A fix "unlocks"
+work. A number "craters". A bug "lurks". Something gets "surfaced", is "baked in", or sits
+"under the hood". None of it is jargon, so the jargon check passes it through. The pull is
+strongest when the finding is dull and the sentence feels flat without it.
+
+**The correction.** Use the plainest word that is still accurate: rose, fell, found, removed,
+added. The decorated word costs twice — the reader converts it back to the plain one, and it
+usually claims more than you measured, since "spike" asserts a shape the data may not have.
+Where the plain word feels flat, that is the sentence working correctly. The content carries the
+interest; the vocabulary should not have to.
 
 ### Orbiting the point instead of stating it
 
