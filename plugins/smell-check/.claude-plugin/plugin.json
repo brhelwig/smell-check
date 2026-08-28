@@ -16,13 +16,5 @@
     "agents",
     "workflow",
     "skills"
-  ],
-  "userConfig": {
-    "autoload": {
-      "type": "boolean",
-      "title": "Load at session start",
-      "description": "Tell every session to load the catalogue before it starts software work. On by default, because a catalogue nobody loaded corrects nothing. Turn it off to pay the context cost only in sessions that ask for it, and reference the skill from CLAUDE.md instead.",
-      "default": true
-    }
-  }
+  ]
 }
