@@ -29,11 +29,29 @@ claude plugin install smell-check@smell-check
 
 The catalogue arrives when a session invokes `using-smell-check`. Two ways to make that happen.
 
-Name it in your project or user `CLAUDE.md`. One line, and it survives plugin updates:
+Name it in your project or user `CLAUDE.md`. It survives plugin updates, and it is the way to
+say how seriously you want the catalogue taken:
 
 ```markdown
-At the start of any software task, use the `smell-check:using-smell-check` skill.
+## Smell check
+
+Before starting any software task — writing or changing code, debugging, reviewing, planning
+work, or answering a question about a codebase — invoke the `smell-check:using-smell-check`
+skill and read it in full.
+
+Apply its corrections zealously. Each one works at the moment of the action it names: before
+the claim, before the comment, before the reply. Nothing later catches what this pass lets
+through, so there is no second gate to leave it for. Where a correction and your own instinct
+disagree, the correction wins.
+
+Invoke it again at a stage boundary in a long session, once the catalogue has fallen behind the
+work.
 ```
+
+Zealous means applying every correction that fits, not forcing the work to fit one. The
+catalogue's own `When a smell does not apply` still governs: a tell that does not match your
+situation is not a smell, and deciding an entry does not apply is a correct outcome rather than
+a way out.
 
 Or invoke `/smell-check:using-smell-check` yourself, when a task is big enough to be worth the
 context.
