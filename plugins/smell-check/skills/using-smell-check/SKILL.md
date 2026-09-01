@@ -450,6 +450,20 @@ layout and moving on. Recognizing a familiar shape and skipping the check.
 memory, and training data are starting points to re-check, not evidence. Where something is
 unverified, say so in the same sentence as the claim.
 
+### Reporting a gap the situation already implies
+
+**The smell.** Spending the close of a report on an absence the reader can derive.
+
+**The tell.** A final paragraph noting that nobody has run the change by hand, that it has not
+been tried in the real app, that no human has walked the flow. It feels like candour, and the
+rule above seems to ask for it.
+
+**The correction.** Nothing has been built, installed, or opened yet, so the reader knows no one
+has used it. Report the gaps they could not infer: a check that failed, a step you could have run
+and skipped, a result that contradicts what a test claims, an assumption you acted on without
+confirming. The rule above exists so a claim never sounds more settled than it is, not so the
+reply narrates every absence. A caveat that follows from the situation is length, not honesty.
+
 ### Asserting a limit without testing it
 
 **The smell.** Declaring what cannot be done, or what would cost too much, as though it were
