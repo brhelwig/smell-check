@@ -67,7 +67,7 @@ def main():
         by_arm[m["arm"]].append(m)
         by_task_arm[m["task"]][m["arm"]].append(m)
 
-    runs = max(len(v) for v in by_arm.values())
+    runs = max(len(rows[arm]) for rows in by_task_arm.values() for arm in rows)
     print(f"## All tasks (mean over {runs} run(s) per task, model {results[0]['model']})\n")
     print(table(by_arm, arms))
     for task, rows in by_task_arm.items():
