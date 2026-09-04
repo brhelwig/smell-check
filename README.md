@@ -27,6 +27,10 @@ claude plugin install smell-check@smell-check
 
 ## Loading the catalogue
 
+The catalogue is about 9,300 words (55,000 characters, roughly 14,000 tokens). A quick question
+is usually cheaper answered without it; a longer implementation session is where loading it earns
+back its own cost.
+
 The catalogue arrives when a session invokes `using-smell-check`. Two ways to make that happen.
 
 Name it in your project or user `CLAUDE.md`. It survives plugin updates, and it is the way to
