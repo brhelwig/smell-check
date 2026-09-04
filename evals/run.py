@@ -47,6 +47,11 @@ PHRASES = [
     "good catch",
     "fair point",
     "want me to",
+    "say the word",
+    "if you'd like",
+    "if you want",
+    "i can also",
+    "happy to",
     "let me know",
     "worth noting",
     "worth mentioning",
@@ -115,6 +120,7 @@ def prepare_fixture(fixture, workdir):
     git(workdir, "init", "-q")
     git(workdir, "add", "-A")
     git(workdir, "commit", "-q", "-m", "Fixture")
+    return git(workdir, "rev-parse", "HEAD").strip()
 
 
 def claude_command(prompt, model, plugin_dir, max_turns, max_budget):
@@ -128,6 +134,7 @@ def claude_command(prompt, model, plugin_dir, max_turns, max_budget):
         "--no-session-persistence",
         "--max-turns", str(max_turns),
         "--max-budget-usd", str(max_budget),
+        "--allowedTools", "Bash(python3 *)", "Bash(python *)", "Bash(git *)",
     ]
     if plugin_dir is not None:
         cmd += ["--plugin-dir", str(plugin_dir), "--append-system-prompt", LOAD_INSTRUCTION]
@@ -212,7 +219,7 @@ def run_once(task, arm, run_number, args, plugin_dir, out):
     run_dir = out / task["name"] / arm / f"run-{run_number}"
     run_dir.mkdir(parents=True, exist_ok=True)
     workdir = Path(tempfile.mkdtemp(prefix=f"smell-{task['name']}-{arm}-"))
-    prepare_fixture(TASKS["fixture"], workdir)
+    base = prepare_fixture(TASKS["fixture"], workdir)
 
     env = {k: v for k, v in os.environ.items() if k != "CLAUDECODE"}
     cmd = claude_command(task["prompt"], args.model, plugin_dir, args.max_turns, args.max_budget_usd)
@@ -235,9 +242,10 @@ def run_once(task, arm, run_number, args, plugin_dir, out):
     (run_dir / "reply.md").write_text(reply)
 
     status = git(workdir, "status", "--porcelain")
-    changed = sorted(line[3:].strip() for line in status.splitlines() if line.strip())
     untracked = [line[3:].strip() for line in status.splitlines() if line.startswith("??")]
-    diff = git(workdir, "diff") + untracked_diff(workdir, untracked)
+    tracked = git(workdir, "diff", "--name-only", base).splitlines()
+    changed = sorted(set(tracked) | set(untracked))
+    diff = git(workdir, "diff", base) + untracked_diff(workdir, untracked)
     (run_dir / "diff.patch").write_text(diff)
 
     expected = set(task["expected_files"])

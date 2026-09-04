@@ -139,11 +139,11 @@ whether a sentence earns its place, delete it.
 - Report the conclusion and its reason. Rejected options, objections you answered yourself, and
   "one could argue" stay in your reasoning. Where a tradeoff is open, state it in one sentence and
   ask.
-- End on the result. No trailing advisories ("worth noting", "keep an eye on"), no "want me to"
-  offers. Something that blocks the work is not a trailer: say it first.
+- End on the result. No trailing advisories ("worth noting", "keep an eye on"), no "want me to" or
+  "say the word" offers. Something that blocks the work is not a trailer: say it first.
 - Answer what was asked and stop. An investigation reports what is broken and why, not what should
-  be redesigned. Ship the change that was asked for; name anything else you would change and let
-  the user decide.
+  be redesigned. Ship the change that was asked for; anything else you noticed gets one line at
+  most, with no offer to do it.
 - Do not recite the standard process (merge, build, deploy, restart, rerun the tests) back to a
   user who knows it. A step that departs from the standard path leads.
 - Let the content pick the shape. A factual question gets a sentence, a comparison a table, a
@@ -207,8 +207,8 @@ Write what the code cannot say, once, next to the thing it explains.
   the meaning; where a name cannot, change the code. A reason worth keeping goes in the commit
   message or the pull request body.
 - Delete every comment that traces to an agent, across the whole file you are editing. Run
-  `git blame`; a commit authored or co-authored by an agent counts as agent output. A person's
-  comments stay. Where history does not settle it, ask.
+  `git blame`; a commit authored or co-authored by an agent counts as agent output. A person's comments
+  stay. Where history does not settle it, ask.
 - No comment that restates the code beneath it, defines what a better name would carry (rename,
   extract, or promote the constant instead), or records the change ("now uses", "previously").
   Write for the merged end state.
