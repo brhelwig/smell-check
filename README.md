@@ -4,19 +4,13 @@ A catalogue of the recurring ways language models and agents fail at software en
 and the corrections for them.
 
 A **smell** here is not a defect in the code being written. It is a defect in how the model
-approaches the work. These failures do not feel like failures from the inside — they feel like
+approaches the work. These failures do not feel like failures from the inside; they feel like
 efficiency, like helpfulness, like getting to the point. Naming them is most of the fix.
 
-Every entry in the catalogue has the same three parts:
-
-- **The smell** — the failure, named.
-- **The tell** — what the model notices itself thinking just before committing it.
-- **The correction** — what to do instead.
-
-Entries are written from observed behavior, not from guesses about how models might go wrong.
-
-One section is not a set of smells. **Plain language** carries a writing standard, taken from
-the ASD-STE100 Simplified Technical English rules, that several corrections elsewhere assume.
+The catalogue is a set of rules, one bullet each, grouped by the kind of work they apply to:
+the workflow around a change, evidence for a claim, replies to the user, comments and durable
+artifacts, and code. Every rule was written from observed behavior, not from guesses about how
+models might go wrong.
 
 ## Install
 
@@ -27,7 +21,7 @@ claude plugin install smell-check@smell-check
 
 ## Loading the catalogue
 
-The catalogue is about 9,300 words (55,000 characters, roughly 14,000 tokens). A quick question
+The catalogue is about 2,800 words (16,000 characters, roughly 4,000 tokens). A quick question
 is usually cheaper answered without it; a longer implementation session is where loading it earns
 back its own cost.
 
@@ -128,17 +122,27 @@ command runs the tests, what counts as done, how terse you want the replies.
 
 ## Adding a smell
 
-Entries live in `plugins/smell-check/skills/using-smell-check/SKILL.md`, grouped into sections
-by the kind of work they show up in. Adding one means editing that file — no manifest change,
-no new skill.
+Rules live in `plugins/smell-check/skills/using-smell-check/SKILL.md`, one bullet each, under
+the section for the kind of work they show up in. Adding one means adding a bullet to that file:
+no manifest change, no new skill.
 
-An entry earns its place when the tell is something a model can actually notice about itself
-and the correction is specific enough to act on. A tell that only a human reviewer could spot
-does not work, because the catalogue is read by the thing being corrected.
+A rule earns its place when a model can notice the moment it applies and the instruction is
+specific enough to act on. Write the rule as an imperative sentence, add a trigger clause only
+where the rule needs one, and keep the reasoning out unless the rule is counterintuitive. Before
+adding a bullet, check whether an existing one already says it; the cost of the catalogue is paid
+on every load.
 
-Keep tool names out of it. Where a correction depends on the tracker, the branching model, or
-how tests are run, read it from preferences instead — those genuinely vary per project, which
-the opinions do not.
+Keep tool names out of it. Where a rule depends on the tracker, the branching model, or how
+tests are run, read it from preferences instead. Those genuinely vary per project, which the
+opinions do not.
+
+## Benchmark
+
+`evals/` holds a benchmark that runs the catalogue against Opus 5 on four small tasks, in three
+arms: the catalogue on `main`, the catalogue in the working tree, and no catalogue. It measures
+task completion, files touched outside the task, comment lines added, reply length, filler
+phrases, and token cost. See `evals/README.md` to run it. A pull request that changes the
+catalogue carries the resulting table.
 
 ## License
 

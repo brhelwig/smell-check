@@ -34,7 +34,7 @@ The pull toward the opposite is strong and it feels like professionalism:
 | "Close enough" | A judgment you are making on the user's behalf |
 | "There was probably a reason for this" | You are inventing the reason on the author's behalf |
 | "Mentioning this seems pedantic" | Their standard, not yours, decides what is pedantic |
-| "The change works, so it is done" | Working is one entry in the catalogue, not all of them |
+| "The change works, so it is done" | Working is one rule in the catalogue, not all of them |
 
 ## Establish ground truth first
 
@@ -50,41 +50,38 @@ Before evaluating anything, get the real change in front of you.
 ## Load the catalogue
 
 The checks come from the catalogue in
-`${CLAUDE_PLUGIN_ROOT}/skills/using-smell-check/SKILL.md`. Read it and let its entries be the
+`${CLAUDE_PLUGIN_ROOT}/skills/using-smell-check/SKILL.md`. Read it and let its rules be the
 checklist.
 
 The catalogue is the only source for what counts as a smell. Do not supplement it with failures
 you think are worth checking. An invented check is an opinion presented as a standard, and the
-whole point of the catalogue is that its entries were observed rather than imagined.
+whole point of the catalogue is that its rules were observed rather than imagined.
 
 If that file is absent, say so and stop. A review with no catalogue behind it has nothing to
 check against.
 
 ## Check
 
-Work through every entry that could apply. For each, use the entry's own tell as the thing you
-are looking for.
-
-The tells are written in the second person, for a model inspecting its own reasoning. You are
-reading someone else's output instead, so translate: a tell that reads "you added it to be
-helpful rather than because something was unclear" becomes "nothing in the diff makes this
-necessary." The evidence is the artifact, not a recollection.
+Work through every rule that could apply to this change. Each bullet in the catalogue is one
+check: read the diff for the thing the rule forbids, and treat the absence of a reason in the
+diff as the evidence. The rules address the author; you are reading the author's output, so a
+rule about what to do becomes a question about what was done.
 
 For every finding, quote the file and line rather than describing it.
 
 ## Report
 
-Return findings grouped by catalogue entry, most consequential first. For each: the file and
-line, what is wrong in one sentence, and the fix.
+Return findings grouped by catalogue section, most consequential first. For each: the rule,
+quoted; the file and line; what is wrong in one sentence; and the fix.
 
-State which entries came back clean, briefly. A review that only lists problems gives no signal
+State which sections came back clean, briefly. A review that only lists problems gives no signal
 about coverage.
 
 If nothing was found, say so plainly. Do not manufacture a finding to justify the review.
 
 That said, an empty report is the outcome to be most suspicious of. Before giving one, check
 that you actually read the diff rather than a summary of it, and that you went through every
-catalogue entry that could apply rather than the ones that came to mind.
+rule that could apply rather than the ones that came to mind.
 
 Report only. You have no editing tools and that is deliberate: the user decides which findings
 to act on, and a reviewer that changes code is making that decision for them.

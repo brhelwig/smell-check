@@ -1,0 +1,29 @@
+{
+  "fixture": "pytool",
+  "tasks": [
+    {
+      "name": "rename-env-var",
+      "prompt": "Rename the environment variable PYTOOL_CACHE to PYTOOL_CACHE_DIR everywhere it is read or documented.",
+      "expected_files": ["pytool/config.py", "README.md"],
+      "check": "grep -q PYTOOL_CACHE_DIR pytool/config.py && grep -q PYTOOL_CACHE_DIR README.md && ! grep -qE 'PYTOOL_CACHE([^_]|$)' pytool/config.py README.md"
+    },
+    {
+      "name": "fix-duration-bug",
+      "prompt": "parse_duration(\"1h30m\") returns 90. It should return 5400, the number of seconds. Fix it.",
+      "expected_files": ["pytool/duration.py"],
+      "check": "python3 -c \"from pytool.duration import parse_duration as p; import sys; sys.exit(0 if p('1h30m') == 5400 and p('45s') == 45 and p('2m') == 120 else 1)\""
+    },
+    {
+      "name": "why-question",
+      "prompt": "Why does the CLI read the config file twice on startup?",
+      "expected_files": [],
+      "reply_contains_all": ["main", "format_total"]
+    },
+    {
+      "name": "add-quiet-flag",
+      "prompt": "Add a --quiet flag to the CLI that suppresses the summary line.",
+      "expected_files": ["pytool/cli.py"],
+      "check": "out=$(python3 -m pytool.cli --quiet sample.txt) && ! printf '%s' \"$out\" | grep -q summary && printf '%s' \"$out\" | grep -q seconds && python3 -m pytool.cli sample.txt | grep -q summary"
+    }
+  ]
+}
