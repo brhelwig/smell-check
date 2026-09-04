@@ -17,6 +17,7 @@ COLUMNS = [
     ("comment_lines_added", "Comment lines", lambda v: f"{v:.1f}"),
     ("diff_lines_added", "Lines added", lambda v: f"{v:.0f}"),
     ("reply_chars", "Reply chars", lambda v: f"{v:.0f}"),
+    ("reply_words", "Reply words", lambda v: f"{v:.0f}"),
     ("headings", "Headings", lambda v: f"{v:.1f}"),
     ("phrase_hits", "Phrase hits", lambda v: f"{v:.1f}"),
     ("em_dashes", "Em dashes", lambda v: f"{v:.1f}"),
