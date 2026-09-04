@@ -90,7 +90,7 @@ def export_old_plugin(ref, out):
     tar_path = target / "plugin.tar"
     tar_path.write_bytes(archive)
     with tarfile.open(tar_path) as tar:
-        tar.extractall(target)
+        tar.extractall(target, filter="data")
     tar_path.unlink()
     return target / PLUGIN_SUBDIR
 
