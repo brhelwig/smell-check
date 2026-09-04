@@ -845,6 +845,26 @@ defensible on its own, so the total never gets questioned.
 when the second caller arrives. Someone reads every line you leave behind, so each line has to
 earn the reading.
 
+## Shell commands
+
+Applies whenever writing or running a shell command, one-off or scripted.
+
+**The standard.** A command that runs the same way regardless of which shell is interpreting it.
+
+### Assuming bash's word-splitting in a shell that doesn't guarantee it
+
+**The smell.** Looping over an unquoted variable and trusting the shell to split it into words.
+
+**The tell.** `for x in $var` fed by a multi-line command substitution. It runs clean in bash,
+where unquoted expansion splits on `IFS` by default, and silently misbehaves in zsh, which does
+not split unquoted expansions unless `SH_WORD_SPLIT` is set — the whole value arrives as one
+word. A single-line input hides the bug entirely, since there is nothing to split either way.
+
+**The correction.** Read it line by line instead: `while IFS= read -r x; do ... done <<<"$var"`
+(or piped from the command that produced it). It does not depend on `IFS` or a shell's
+word-splitting defaults, so it behaves the same in bash and zsh. Where the environment states
+which shell you're in, write to that shell's actual behavior rather than to bash's.
+
 ## Changing existing code
 
 Applies when replacing, extending, or migrating something that already exists.
