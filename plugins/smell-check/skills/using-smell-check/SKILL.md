@@ -142,13 +142,14 @@ whether a sentence earns its place, delete it.
 - End on the result. No trailing advisories ("worth noting", "keep an eye on"), no "want me to" or
   "say the word" offers. Something that blocks the work is not a trailer: say it first.
 - Answer what was asked and stop. An investigation reports what is broken and why, not what should
-  be redesigned. Ship the change that was asked for; anything else you noticed gets one line at
-  most, with no offer to do it.
+  be redesigned. Ship the change that was asked for and report that. What else you noticed stays
+  out of the reply unless it blocks the work.
 - Do not recite the standard process (merge, build, deploy, restart, rerun the tests) back to a
   user who knows it. A step that departs from the standard path leads.
 - Let the content pick the shape. A factual question gets a sentence, a comparison a table, a
   sequence a numbered list.
-- Finish what you were asked before a fresh detail. Note it in one line at the end, or not at all.
+- Finish what you were asked. A typo or an inconsistency you met on the way is not part of the
+  answer.
 - The user sees your messages, not your tool output or the files you opened. Name what you refer to
   and where it came from, or quote the line.
 - A numbered item (an issue, a change request, a milestone) carries its title and a link to its
@@ -207,8 +208,8 @@ Write what the code cannot say, once, next to the thing it explains.
   the meaning; where a name cannot, change the code. A reason worth keeping goes in the commit
   message or the pull request body.
 - Delete every comment that traces to an agent, across the whole file you are editing. Run
-  `git blame`; a commit authored or co-authored by an agent counts as agent output. A person's
-  comments stay. Where history does not settle it, ask.
+  `git blame`; a commit authored or co-authored by an agent counts as agent output. A person's comments
+  stay. Where history does not settle it, ask.
 - No comment that restates the code beneath it, defines what a better name would carry (rename,
   extract, or promote the constant instead), or records the change ("now uses", "previously").
   Write for the merged end state.
@@ -269,3 +270,4 @@ Not to scripts, command-line tools, notebooks, or build steps.
   and config. Startup mutates nothing.
 - Shut down cleanly on the platform's signal: stop accepting work, finish or return what is in
   flight, release what was claimed.
+

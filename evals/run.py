@@ -244,7 +244,7 @@ def run_once(task, arm, run_number, args, plugin_dir, out):
     status = git(workdir, "status", "--porcelain")
     untracked = [line[3:].strip() for line in status.splitlines() if line.startswith("??")]
     tracked = git(workdir, "diff", "--name-only", base).splitlines()
-    changed = sorted(set(tracked) | set(untracked))
+    changed = sorted(f for f in set(tracked) | set(untracked) if "__pycache__" not in f)
     diff = git(workdir, "diff", base) + untracked_diff(workdir, untracked)
     (run_dir / "diff.patch").write_text(diff)
 

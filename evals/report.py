@@ -56,6 +56,9 @@ def main():
         return 2
     out = Path(sys.argv[1])
     results = json.loads((out / "results.json").read_text())
+    for m in results:
+        for key in ("files_changed", "files_outside_expected"):
+            m[key] = [f for f in m[key] if "__pycache__" not in f]
     arms = []
     for m in results:
         if m["arm"] not in arms:
