@@ -75,8 +75,8 @@ correct outcome.
 ## Preferences
 
 This plugin ships no opinion about which tools an adopter uses. Anything tool-specific — the
-issue tracker, the branching model, the review process, the language conventions — lives in a
-preferences file that the adopter writes, never in a skill.
+issue tracker, the branching model, the review process, the language conventions, which model
+runs a subagent — lives in a preferences file that the adopter writes, never in a skill.
 
 Two locations, both optional:
 
@@ -1213,6 +1213,6 @@ parent runs on.
 **The tell.** Explore and Plan subagents appear in the usage breakdown at a noticeable share.
 Their job was to find files or draft a list, and their output was a few hundred words.
 
-**The correction.** Pass a cheaper model on every spawn whose job is search, summary, or file
-location. Reserve the parent's tier for a subagent that must make a judgment call. Where the
-harness has a default subagent model setting, prefer to set it once.
+**The correction.** Check preferences for a model budget section before spawning. Where one
+exists, follow it. Otherwise pass a cheaper model on every spawn whose job is search, summary, or
+file location, and reserve the parent's tier for a subagent that must make a judgment call.
