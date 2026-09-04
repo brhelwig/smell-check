@@ -206,8 +206,9 @@ Write what the code cannot say, once, next to the thing it explains.
 - Write no comments. Write one only where the user asks for it, in the place they ask. Names carry
   the meaning; where a name cannot, change the code. A reason worth keeping goes in the commit
   message or the pull request body.
-- Delete every comment that traces to an agent, across the whole file you are editing. Run `git blame`; a commit authored or co-authored by an agent counts as agent output. A person's comments
-  stay. Where history does not settle it, ask.
+- Delete every comment that traces to an agent, across the whole file you are editing. Run
+  `git blame`; a commit authored or co-authored by an agent counts as agent output. A person's
+  comments stay. Where history does not settle it, ask.
 - No comment that restates the code beneath it, defines what a better name would carry (rename,
   extract, or promote the constant instead), or records the change ("now uses", "previously").
   Write for the merged end state.
