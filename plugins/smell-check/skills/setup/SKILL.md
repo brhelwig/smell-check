@@ -49,6 +49,13 @@ counts as done. Whether a claim of success requires having run something.
 **Communication.** Preferred length and directness. Terms to avoid. How much to explain
 before acting.
 
+**Model budget.** Whether search and exploration subagents should run on a cheaper model than
+the parent. Whether routine work — merge conflicts, log reading, renames — should hand off to a
+cheaper tier, and how to offer that.
+
+**Disclosure.** Which org or owner counts as the same team, so work discussed freely inside it
+stays generic — no project name, cost, or branch — when written to a repository outside it.
+
 ## Write the file
 
 Produce markdown under the headings above, keeping only the sections that got answers. Record
@@ -71,6 +78,16 @@ whenever you name the change. <who> reviews. Do not merge; hand off after the re
 ## Verification
 
 Tests: `<command>`. Lint: `<command>`. A change is done when both pass.
+
+## Model budget
+
+Explore and search subagents run on haiku. Plan subagents run on sonnet.
+Use the parent's model only for a subagent that must decide something.
+
+## Disclosure
+
+Repositories under `<org>` share context freely. Anything written to a repository under
+another owner is generic about what the agent is working on.
 ```
 
 Write in plain declarative sentences addressed to whoever reads the file next, human or

@@ -75,8 +75,8 @@ correct outcome.
 ## Preferences
 
 This plugin ships no opinion about which tools an adopter uses. Anything tool-specific — the
-issue tracker, the branching model, the review process, the language conventions — lives in a
-preferences file that the adopter writes, never in a skill.
+issue tracker, the branching model, the review process, the language conventions, which model
+runs a subagent — lives in a preferences file that the adopter writes, never in a skill.
 
 Two locations, both optional:
 
@@ -730,7 +730,7 @@ This overrides any plugin or skill that instructs otherwise.
 ## Comments and documentation
 
 Applies whenever writing or editing a comment, a documentation file, or any explanatory text
-that lives alongside code.
+that lives alongside code — including a pull request body, a ticket, or an ADR.
 
 Write no comments. Write one only where the user asks for it, in the place they ask for it.
 There is no case you can make from the inside that earns one. Well-named variables, functions,
@@ -826,6 +826,21 @@ mean touching more files.
 
 **The correction.** Duplication is evidence the explanation sits in the wrong place. Extract it
 to one place, even when that makes the change reach further.
+
+### Taking permission for length as permission for a wall of text
+
+**The smell.** Reading an instruction that a durable artifact has no length limit as license to
+skip structure.
+
+**The tell.** A repository's own instructions say a pull request body, a ticket, or an ADR has no
+length limit, because nothing else reads it. The body comes back as one long unstructured block —
+full root cause, every alternative, reference material — carrying the same weight as the summary.
+It reads as thorough, because the audience does want the detail somewhere.
+
+**The correction.** A durable artifact has two readers: the reviewer now, who needs what changed
+and which few calls need scrutiny, and whoever asks why later, who wants everything. Put a short
+review guide first — what changed, the judgment calls worth a look — and push the investigation
+below it. No length limit licenses depth, not a wall of undifferentiated text.
 
 ## Writing code
 
@@ -988,6 +1003,23 @@ will not be committed.
 **The correction.** Refuse. Suggest an encrypted secrets tool such as SOPS instead, and let the
 user place it.
 
+### Carrying private context across an org boundary
+
+**The smell.** Writing to a repository outside the org you are working in with the details of the
+work you came from.
+
+**The tell.** The target of `gh issue create`, `gh pr create`, or a comment is a different owner
+from the working repository. The body opens with "while working on `<project>`", quotes a cost,
+lists pull request numbers, or pastes a usage panel. It feels like good evidence, because it is
+the evidence you have.
+
+**The correction.** An org boundary is a disclosure boundary. Before writing to a repository under
+a different owner, reread the body for the project name, the repository slug, dollar amounts,
+exact figures, branch names, and anything a stranger could use to identify the work. Replace them
+with generic phrasing: "a long implementation session on a private project." Keep the evidence
+that supports the request and drop the evidence that identifies its source. Where the target is a
+public repository, treat everything in the body as published the moment it lands.
+
 ## Waiting on external work
 
 Applies when something is running outside the session — a build, a deploy, a queued job.
@@ -1015,7 +1047,8 @@ finished, failed, or stuck. A wait that can only end because the user speaks up 
 change anything.
 
 **The correction.** When the work has a roughly known duration, schedule a single wakeup near the
-expected finish and check once.
+expected finish and check once. Otherwise wait for the user or a notification. Once the user says
+to stop watching, that holds for the rest of the session.
 
 ### Declaring done while the work can still come back
 
@@ -1138,3 +1171,48 @@ a termination signal. Restarting is something you do by killing it.
 **The correction.** Shut down cleanly on the signal the platform sends: stop accepting new work,
 finish or return what is in flight, release what was claimed. Processes are killed constantly by
 deploys, by autoscaling, by the host going away, so a clean exit is a normal path.
+
+## Budget
+
+Applies to how a session spends context and model tier, not to how it writes or reasons within a
+turn. Every turn re-reads the whole conversation, so the price of a session is context size
+multiplied by turn count; the words an agent writes are close to free by comparison.
+
+**The standard.** Spend the expensive resource — a large context, the top model tier — only where
+the task needs it.
+
+### Carrying a whole project in one session
+
+**The smell.** Starting the next task in the session that finished the last one.
+
+**The tell.** A second issue, pull request, or unrelated question appears and the agent keeps
+going. Compaction has already happened once. The summary at the top of the context describes work
+that is finished.
+
+**The correction.** A finished task is a session boundary. Say so, and let the user start fresh.
+Where the user continues anyway, compact before the next task begins so the following turns read
+a small context.
+
+### Running routine work on the expensive model
+
+**The smell.** Letting the model choice ride from the hard part of a task into the easy part.
+
+**The tell.** Merge conflicts, log reading, label edits, and rename chores run on the same tier
+that did the design. The user's weekly budget for that tier is the tightest bucket in their usage
+panel.
+
+**The correction.** This choice is the user's, and the agent cannot switch itself. Name it: when a
+stretch of routine work is next, say that a cheaper model would do it and that the user can switch
+with `/model`.
+
+### Spawning a subagent on the parent's model
+
+**The smell.** A search or an exploration runs on the most expensive tier because that is what the
+parent runs on.
+
+**The tell.** Explore and Plan subagents appear in the usage breakdown at a noticeable share.
+Their job was to find files or draft a list, and their output was a few hundred words.
+
+**The correction.** Check preferences for a model budget section before spawning. Where one
+exists, follow it. Otherwise pass a cheaper model on every spawn whose job is search, summary, or
+file location, and reserve the parent's tier for a subagent that must make a judgment call.
