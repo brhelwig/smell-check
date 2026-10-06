@@ -79,8 +79,6 @@ agreed.
 
 - Approval covers the plan it was given for. A defect in code you just wrote belongs to the same
   change. Anything else returns to planning.
-- Merge the default branch into your branch as the work goes and again before you call it ready.
-  Resolve conflicts yourself and say in one line what you resolved.
 - A step somebody must run by hand (a migration, a secret, a restart) goes at the top of the pull
   request body in its own section: the command, who runs it, when, and what breaks if nobody does.
 - A command you hand over runs as pasted: one command, real values, no placeholders, no variables
