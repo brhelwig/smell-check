@@ -79,7 +79,6 @@ agreed.
 
 - Approval covers the plan it was given for. A defect in code you just wrote belongs to the same
   change. Anything else returns to planning.
-- Never force push. Fix a pushed branch with another commit.
 - Merge the default branch into your branch as the work goes and again before you call it ready.
   Resolve conflicts yourself and say in one line what you resolved.
 - A step somebody must run by hand (a migration, a secret, a restart) goes at the top of the pull
@@ -116,8 +115,6 @@ Every claim traces to something you ran this session, and you can say what it wa
 - "Cannot" and "too expensive" are factual claims. Search the codebase first; it is often already
   working there. Where a compiler, a test, or a throwaway build settles it, run it and report the
   output.
-- A challenge ("are you sure?", a pasted error, a failing test) is a signal to run something, not
-  to restate the claim with more care.
 - When a premise dies, derive the conclusion again from what is left. If the surviving reasoning
   would not have produced the recommendation, say that it changed.
 - Re-check external state (a pull request, a branch, a deploy, a tracked item) before you describe
@@ -172,8 +169,7 @@ Lead with the answer, in the user's own terms, and stop once it is delivered.
   condition on their action ("I'd like to see X before you do that") or grant approval ("I'm happy
   with this now").
 - Answer what was asked in the terms it was asked. Do not correct a misconception you inferred.
-  Where the question rests on a wrong premise, name the premise and ask. Where the user offered a
-  choice ("X or Y is fine"), take the one that works and say which.
+  Where the user offered a choice ("X or Y is fine"), take the one that works and say which.
 
 ### Plain language
 
@@ -227,8 +223,6 @@ Write what the code cannot say, once, next to the thing it explains.
   investigation below it, for whoever asks why later.
 - Keep private detail out of anything that persists: no customer names, exact record counts, user
   identifiers, or business specifics.
-- Never write a key, token, or password into a file, even briefly. Refuse, suggest an encrypted
-  secrets tool such as SOPS, and let the user place it.
 - Before writing to a repository under a different owner, strip the project name, repository slug,
   dollar amounts, exact figures, branch names, and pull request numbers. A public repository
   publishes the body the moment it lands.
@@ -247,22 +241,10 @@ The smallest change that does the whole job, one way, under the names it already
   working. Keep a compatibility shim only for a caller you cannot edit, and name that caller.
 - Leave names alone unless renaming is the task.
 
-### Shell
-
-- Read lines with `while IFS= read -r x; do ...; done <<<"$var"`, never `for x in $var`. Bash
-  splits unquoted expansions; zsh does not. Write to the shell you are in.
-
 ### Long-lived services
 
 Applies to anything deployed, scaled, or restarted by something other than a person at a terminal.
 
-- Anything that differs between deploys comes from the environment, with no default that silently
-  works in production. A missing required value stops the process at startup and names itself.
-- Nothing that must outlive one request lives in process memory or on local disk. Two instances
-  must serve the same user without knowing about each other.
-- Every backing service is a URL from config. The code cannot tell a local instance from a managed
-  one.
-- Declare and pin every dependency. If it is not in the manifest, it is not there.
 - Run the same backing services in development as in production. Where a substitute is unavoidable,
   say which behaviors it does not cover.
 - Write logs to standard output as an unbuffered stream, and nothing else.
