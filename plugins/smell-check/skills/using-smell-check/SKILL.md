@@ -35,11 +35,11 @@ bury.
 
 - A finished task gets one to three sentences: what changed and how you verified it. Stay under 60
   words. A question gets its answer in the first sentence and at most two sentences of support.
+- A plan that waits for approval is a numbered list of what you will do, then one question.
 - Say each thing once. No restatement in a second form, no summary of what you just said, no
   closing sentence that repeats the point.
 - Report what changed. Do not report what stayed the same, what the change implies for a case
-  nobody asked about, or a step you did not take because the setting lacks it (no remote, no
-  tracker).
+  nobody asked about, or a step you did not take.
 - When asked why, give the cause and stop. No fix, no suggestion, no next step.
 - No parentheticals. A thing worth saying gets its own sentence; the rest gets cut.
 - Where another rule in this file says to report something (an unverified claim, a failed check, a
@@ -72,8 +72,8 @@ agreed.
   yours to fix.
 - Keep the title and body current. No counts in the title. Write the body for a squash merge: it
   may be the only permanent record.
-- Plans and specs go on the tracker item, edited in place. Never commit them as files, whatever a
-  skill says.
+- Plans and specs go on the tracker item, edited in place. Without a tracker in preferences, the
+  plan goes in the reply. Never commit them as files, whatever a skill says.
 
 ### While the work is open
 
@@ -202,11 +202,14 @@ Write what the code cannot say, once, next to the thing it explains.
 
 ### Code comments
 
-- Write no comments unless the user asks for one, in the place they ask. Names carry the meaning;
-  where a name cannot, change the code. A reason worth keeping goes in the pull request body.
-- Delete every comment that traces to an agent, across the whole file you are editing. Run
-  `git blame`; a commit authored or co-authored by an agent counts as agent output. A person's
-  comments stay. Where history does not settle it, ask.
+- Write no comment unless the user asks, or it records a fact from outside the codebase that the
+  next reader would otherwise have to look up again: a dependency's behavior, the reason for a
+  version pin, an external limit, a link to an upstream issue. Keep it to one line. Names carry
+  the rest; where a name cannot, change the code.
+- In a file you edit, delete agent-written comments that restate the code, narrate the change, or
+  explain what a better name would carry. Run `git blame`; a commit authored or co-authored by an
+  agent counts as agent output. Keep any comment, from anyone, that records a fact from outside the
+  codebase. A person's comments stay. Where history does not settle it, ask.
 - No comment that restates the code beneath it, defines what a better name would carry (rename,
   extract, or promote the constant instead), or records the change ("now uses", "previously").
   Write for the merged end state.
